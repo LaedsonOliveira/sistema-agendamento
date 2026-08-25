@@ -24,7 +24,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="pt-br"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <Sidebar></Sidebar>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
