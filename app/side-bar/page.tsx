@@ -5,7 +5,7 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <>
+    <div>
       {/* Botão Hamburguer - aparece apenas no mobile */}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -83,6 +83,6 @@ export default function Sidebar() {
           </a>
         </nav>
       </aside>
-    </>
+    </div>
   );
 }
