@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [configuracoesAberto, setConfiguracoesAberto] = useState(false);
 
   return (
     <div>
@@ -81,6 +83,37 @@ export default function Sidebar() {
           >
             Financeiro
           </a>
+          <button
+            onClick={() => setConfiguracoesAberto(!configuracoesAberto)}
+            className="w-full flex items-center justify-between px-4 py-2 text-gray-700 hover:bg-gray-200 rounded transition-colors"
+          >
+            <span> Configurações</span>
+
+            <span>
+              {configuracoesAberto ? "▲" : "▼"}
+            </span>
+          </button>
+
+          {/* Submenu */}
+          {configuracoesAberto && (
+            <div className="ml-4 mt-1 space-y-1">
+
+              <Link
+                href="/configuracoes/perfil"
+                className="block px-4 py-2 text-gray-600 hover:bg-gray-200 rounded transition-colors"
+              >
+                Perfil
+              </Link>
+
+              <Link
+                href="/configuracoes/estabelecimento"
+                className="block px-4 py-2 text-gray-600 hover:bg-gray-200 rounded transition-colors"
+              >
+                Estabelecimento
+              </Link>
+
+            </div>
+          )}
         </nav>
       </aside>
     </div>
