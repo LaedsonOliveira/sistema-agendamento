@@ -66,16 +66,16 @@ export default function Sidebar() {
             Dashboard
           </a>
           <a
-            href="#"
+            href="/configuracoes/meuNegocio?aba=servicos"
             className="block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded transition-colors"
           >
             Serviços
           </a>
           <a
-            href="#"
+            href="/configuracoes/meuNegocio?aba=barbeiros"
             className="block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded transition-colors"
           >
-            Funcionários
+            Funcionarios
           </a>
           <a
             href="#"
@@ -106,10 +106,10 @@ export default function Sidebar() {
               </Link>
 
               <Link
-                href="/configuracoes/estabelecimento"
+                href="/configuracoes/meuNegocio"
                 className="block px-4 py-2 text-gray-600 hover:bg-gray-200 rounded transition-colors"
               >
-                Estabelecimento
+                Meu Negócio
               </Link>
 
             </div>

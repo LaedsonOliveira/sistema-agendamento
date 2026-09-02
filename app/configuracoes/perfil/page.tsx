@@ -68,7 +68,7 @@ const Perfil: React.FC = () => {
                 <img src={foto} alt="Foto de perfil" className="foto-perfil" />
               ) : (
                 <div className="foto-placeholder">
-                  <span className="foto-icon">👤</span>
+                  <span className="foto-icon">Sem foto</span>
                 </div>
               )}
             </div>
