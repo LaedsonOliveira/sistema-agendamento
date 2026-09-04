@@ -11,9 +11,19 @@ interface Props {
 export default function AbaPersonalizacao({ personalizacao, setPersonalizacao }: Props) {
   const [previewLogo, setPreviewLogo] = useState<string | null>(personalizacao.logo || null);
   const [previewBanner, setPreviewBanner] = useState<string | null>(personalizacao.banner || null);
+  const [nomeLogo, setNomeLogo] = useState<string>("");
+  const [nomeBanner, setNomeBanner] = useState<string>("");
 
   const logoInputRef = useRef<HTMLInputElement>(null);
   const bannerInputRef = useRef<HTMLInputElement>(null);
+
+  const truncarNome = (nome: string, tamanhoMaximo: number = 20) => {
+    if (nome.length <= tamanhoMaximo) return nome;
+    const extensao = nome.split('.').pop();
+    const nomeSemExtensao = nome.substring(0, nome.lastIndexOf('.'));
+    const parteVisivel = nomeSemExtensao.substring(0, tamanhoMaximo);
+    return `${parteVisivel}...${extensao ? '.' + extensao : ''}`;
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -23,6 +33,7 @@ export default function AbaPersonalizacao({ personalizacao, setPersonalizacao }:
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setNomeLogo(truncarNome(file.name, 20));
       const reader = new FileReader();
       reader.onloadend = () => {
         const result = reader.result as string;
@@ -36,6 +47,7 @@ export default function AbaPersonalizacao({ personalizacao, setPersonalizacao }:
   const handleBannerUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setNomeBanner(truncarNome(file.name, 20));
       const reader = new FileReader();
       reader.onloadend = () => {
         const result = reader.result as string;
@@ -49,12 +61,14 @@ export default function AbaPersonalizacao({ personalizacao, setPersonalizacao }:
   const removerLogo = () => {
     setPreviewLogo(null);
     setPersonalizacao({ ...personalizacao, logo: null });
+    setNomeLogo("");
     if (logoInputRef.current) logoInputRef.current.value = "";
   };
 
   const removerBanner = () => {
     setPreviewBanner(null);
     setPersonalizacao({ ...personalizacao, banner: null });
+    setNomeBanner("");
     if (bannerInputRef.current) bannerInputRef.current.value = "";
   };
 
@@ -65,195 +79,171 @@ export default function AbaPersonalizacao({ personalizacao, setPersonalizacao }:
   };
 
   return (
-    <div>
+    <div className="space-y-6">
       <div>
-        <h2>Personalização</h2>
-        <p>Personalize a aparência da página pública de agendamento</p>
+        <h2 className="text-xl font-semibold text-slate-950">Personalização</h2>
+        <p className="mt-1 text-sm text-slate-500">Personalize a aparência da página pública de agendamento</p>
       </div>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* Preview */}
-        <div>
-          <h3>Preview da Página do Cliente</h3>
-          <div>
-            {previewBanner && (
-              <div />
-            )}
+        <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+          <h3 className="text-sm font-semibold text-slate-950">Preview da Página do Cliente</h3>
+          <div className="mt-4 overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
+            <div
+              className="aspect-[3/1] bg-slate-200 bg-cover bg-center"
+              style={previewBanner ? { backgroundImage: `url(${previewBanner})` } : undefined}
+            />
 
-            <div>
+            <div className="relative space-y-3 px-6 pb-6 pt-12 text-center">
               {previewLogo ? (
-                <img src={previewLogo} alt="Logo" />
+                <img src={previewLogo} alt="Logo" className="absolute left-1/2 top-0 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-white object-cover shadow-md" />
               ) : (
-                <div>Sem logo</div>
+                <div className="absolute left-1/2 top-0 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white bg-slate-100 text-xs text-slate-400 shadow-md">Sem logo</div>
               )}
 
-              <h3>{personalizacao.nomeNegocio || "Sua Barbearia"}</h3>
+              <h3 className="font-semibold text-slate-950">{personalizacao.nomeNegocio || "Sua Barbearia"}</h3>
 
-              <p>{personalizacao.mensagemBoasVindas || "Bem-vindo! Agende seu horário."}</p>
+              <p className="mx-auto max-w-md text-sm leading-6 text-slate-500">{personalizacao.mensagemBoasVindas || "Bem-vindo! Agende seu horário."}</p>
 
-              <div>
-                <span>Corte</span>
-                <span>Barba</span>
-                <span>Combo</span>
+              <div className="flex justify-center gap-2 pt-2 text-xs text-slate-600">
+                <span className="rounded-full bg-white px-3 py-1.5 shadow-sm">Corte</span>
+                <span className="rounded-full bg-white px-3 py-1.5 shadow-sm">Barba</span>
+                <span className="rounded-full bg-white px-3 py-1.5 shadow-sm">Combo</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Uploads */}
-        <div>
-          <div>
-            <label>Logo da Barbearia</label>
-            <div>
-              <div>
+        <div className="grid gap-4 lg:grid-cols-2">
+          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+            <label className="text-sm font-semibold text-slate-950">Minha Logo</label>
+            <div className="mt-4 flex items-center gap-4">
+              <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-slate-100 text-center text-xs text-slate-400">
                 {previewLogo ? (
-                  <img src={previewLogo} alt="Logo" />
+                  <img src={previewLogo} alt="Logo" className="h-full w-full object-cover" />
                 ) : (
                   <span>Sem logo</span>
                 )}
               </div>
 
-              <div>
+              <div className="min-w-0">
                 <input
                   ref={logoInputRef}
                   type="file"
                   accept="image/*"
                   onChange={handleLogoUpload}
                   id="logo-upload"
+                  className="hidden"
                 />
-                <label htmlFor="logo-upload">
+                <label htmlFor="logo-upload" className="inline-flex cursor-pointer rounded-lg bg-slate-950 px-3 py-2 text-sm font-medium text-white hover:bg-slate-700">
                   Upload Logo
                 </label>
+                {nomeLogo && (
+                  <span className="ml-2 text-sm text-slate-600">
+                    {nomeLogo}
+                  </span>
+                )}
                 {previewLogo && (
-                  <button type="button" onClick={removerLogo}>
+                  <button type="button" onClick={removerLogo} className="ml-2 text-sm font-medium text-red-600 hover:text-red-700">
                     Remover
                   </button>
                 )}
-                <p>Formatos: PNG, JPG, SVG</p>
+                <p className="mt-2 text-xs text-slate-400">Formatos: PNG, JPG, SVG</p>
               </div>
             </div>
           </div>
 
-          <div>
-            <label>Banner de Fundo</label>
-            <div>
-              <div>
+          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+            <label className="text-sm font-semibold text-slate-950">Banner de Fundo</label>
+            <div className="mt-4 flex items-center gap-4">
+              <div className="aspect-[3/1] min-w-0 flex-1 items-center justify-center overflow-hidden rounded-lg bg-slate-100 text-xs text-slate-400">
+                {previewBanner && <img src={previewBanner} alt="Banner" className="h-full w-full object-cover" />}
                 {!previewBanner && <span>Sem banner</span>}
               </div>
 
-              <div>
+              <div className="shrink-0">
                 <input
                   ref={bannerInputRef}
                   type="file"
                   accept="image/*"
                   onChange={handleBannerUpload}
                   id="banner-upload"
+                  className="hidden"
                 />
-                <label htmlFor="banner-upload">
+                <label htmlFor="banner-upload" className="inline-flex cursor-pointer rounded-lg bg-slate-950 px-3 py-2 text-sm font-medium text-white hover:bg-slate-700">
                   Upload Banner
                 </label>
+                {nomeBanner && (
+                  <span className="ml-2 text-sm text-slate-600">
+                    {nomeBanner}
+                  </span>
+                )}
                 {previewBanner && (
-                  <button type="button" onClick={removerBanner}>
+                  <button type="button" onClick={removerBanner} className="ml-2 text-sm font-medium text-red-600 hover:text-red-700">
                     Remover
                   </button>
                 )}
-                <p>Recomendado: 1200x400px</p>
+                <p className="mt-2 text-xs text-slate-400"></p>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Cores */}
-        <div>
-          <div>
-            <label>Cor Principal</label>
-            <div>
-              <input
-                type="color"
-                name="corPrimaria"
-                value={personalizacao.corPrimaria || "#1a1a2e"}
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="corPrimaria"
-                value={personalizacao.corPrimaria || ""}
-                onChange={handleChange}
-                placeholder="#1a1a2e"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label>Cor Secundária</label>
-            <div>
-              <input
-                type="color"
-                name="corSecundaria"
-                value={personalizacao.corSecundaria || "#e94560"}
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="corSecundaria"
-                value={personalizacao.corSecundaria || ""}
-                onChange={handleChange}
-                placeholder="#e94560"
-              />
-            </div>
-          </div>
-        </div>
-
         {/* Mensagem */}
-        <div>
-          <label>Mensagem de Boas-vindas</label>
+        <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+          <label className="block text-sm font-medium text-slate-700">Mensagem de Boas-vindas</label>
           <textarea
             name="mensagemBoasVindas"
             value={personalizacao.mensagemBoasVindas || ""}
             onChange={handleChange}
             rows={3}
             placeholder="Escreva uma mensagem de boas-vindas para seus clientes..."
+            className="mt-2 w-full resize-y rounded-lg border border-slate-300 px-3 py-2.5 text-sm leading-6 outline-none focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
           />
         </div>
 
         {/* Redes Sociais */}
-        <div>
+        <div className="grid gap-5 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:grid-cols-2 sm:p-6">
           <div>
-            <label>Nome do Negócio</label>
+            <label className="block text-sm font-medium text-slate-700">Nome do Negócio</label>
             <input
               type="text"
               name="nomeNegocio"
               value={personalizacao.nomeNegocio || ""}
               onChange={handleChange}
-              placeholder="Ex: Barbearia do Edyni"
+              placeholder="Ex: teste"
+              className="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
             />
           </div>
 
           <div>
-            <label>Instagram</label>
+            <label className="block text-sm font-medium text-slate-700">Instagram</label>
             <input
               type="text"
               name="instagram"
               value={personalizacao.instagram || ""}
               onChange={handleChange}
               placeholder="@barbeariaedyni"
+              className="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
             />
           </div>
           <div>
-            <label>WhatsApp</label>
+            <label className="block text-sm font-medium text-slate-700">WhatsApp</label>
             <input
               type="text"
               name="whatsapp"
               value={personalizacao.whatsapp || ""}
               onChange={handleChange}
               placeholder="(81) 99999-9999"
+              className="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
             />
           </div>
         </div>
 
         {/* Botão Salvar */}
-        <div>
-          <button type="submit">
+        <div className="flex justify-end">
+          <button type="submit" className="rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2">
             Salvar Personalização
           </button>
         </div>
