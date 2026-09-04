@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [configuracoesAberto, setConfiguracoesAberto] = useState(false);
+  const pathname = usePathname();
 
   return (
     <div>
@@ -85,29 +87,38 @@ export default function Sidebar() {
           </a>
           <button
             onClick={() => setConfiguracoesAberto(!configuracoesAberto)}
-            className="w-full flex items-center justify-between px-4 py-2 text-gray-700 hover:bg-gray-200 rounded transition-colors"
+            className={`flex w-full items-center justify-between rounded-lg px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 ${configuracoesAberto
+              ? "bg-slate-200 text-slate-950"
+              : "text-slate-700 hover:bg-slate-200 hover:text-slate-950"
+              }`}
           >
-            <span> Configurações</span>
+            <span>Configurações</span>
 
-            <span>
+            <span className="text-xs text-slate-500" aria-hidden="true">
               {configuracoesAberto ? "▲" : "▼"}
             </span>
           </button>
 
           {/* Submenu */}
           {configuracoesAberto && (
-            <div className="ml-4 mt-1 space-y-1">
+            <div className="ml-3 mt-1 space-y-1 border-l border-slate-300 pl-2">
 
               <Link
                 href="/configuracoes/perfil"
-                className="block px-4 py-2 text-gray-600 hover:bg-gray-200 rounded transition-colors"
+                className={`block rounded-lg px-4 py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 ${pathname === "/configuracoes/perfil"
+                  ? "bg-slate-950 font-medium text-white"
+                  : "text-slate-600 hover:bg-slate-200 hover:text-slate-950"
+                  }`}
               >
                 Perfil
               </Link>
 
               <Link
                 href="/configuracoes/meuNegocio"
-                className="block px-4 py-2 text-gray-600 hover:bg-gray-200 rounded transition-colors"
+                className={`block rounded-lg px-4 py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 ${pathname === "/configuracoes/meuNegocio"
+                  ? "bg-slate-950 font-medium text-white"
+                  : "text-slate-600 hover:bg-slate-200 hover:text-slate-950"
+                  }`}
               >
                 Meu Negócio
               </Link>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { startTransition, useState, useEffect } from "react";
 import {
     DadosNegocio,
     Servico,
@@ -17,7 +17,7 @@ import AbaPersonalizacao from "./componentes/AbaPersonalizacao";
 
 // Dados mockados iniciais
 const dadosMock: DadosNegocio = {
-    nome: "Barbearia do Edyni",
+    nome: "teste",
     descricao: "A melhor barbearia da região com profissionais experientes",
     telefone: "(81) 99999-9999",
     email: "contato@barbeariaedyni.com",
@@ -50,26 +50,26 @@ const horariosMock: HorarioDia[] = [
 ];
 
 const personalizacaoMock: Personalizacao = {
-    nomeNegocio: "Barbearia do Edyni",
+    nomeNegocio: "teste",
     corPrimaria: "#1a1a2e",
     corSecundaria: "#e94560",
     logo: null,
     banner: null,
-    mensagemBoasVindas: "Bem-vindo à Barbearia do Edyni! Agende seu horário e saia renovado.",
-    instagram: "@barbeariaedyni",
-    facebook: "/barbeariaedyni",
+    mensagemBoasVindas: "Bem-vindo à Barbearia! Agende seu horário e saia renovado.",
+    instagram: "@barbearateste",
+    facebook: "/barbearateste",
     whatsapp: "(81) 99999-9999"
 };
 
 export default function MeuNegocio() {
-    const searchParams = useSearchParams(); 
+    const searchParams = useSearchParams();
     const [abaAtiva, setAbaAtiva] = useState("dados");
 
     // Quando a URL mudar, atualiza a aba ativa
     useEffect(() => {
         const aba = searchParams.get("aba");
         if (aba) {
-            setAbaAtiva(aba);
+            startTransition(() => setAbaAtiva(aba));
         }
     }, [searchParams]);
 
@@ -88,30 +88,33 @@ export default function MeuNegocio() {
     ];
 
     return (
-        <div>
-            <h1>Configurações do Negócio</h1>
-            <p>Gerencie as informações que seus clientes vão ver na página de agendamento</p>
+        <div className="mx-auto max-w-6xl space-y-8 pb-10 text-slate-900">
+            <header className="space-y-2">
+                <h1 className="text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">Configurações do Negócio</h1>
+                <p className="max-w-2xl text-sm leading-6 text-slate-500">Gerencie as informações que seus clientes vão ver na página de agendamento</p>
+            </header>
 
             {/* Abas */}
-            <div>
-                {abas.map((aba) => (
-                    <button
-                        key={aba.id}
-                        onClick={() => setAbaAtiva(aba.id)}
-                        style={{
-                            fontWeight: abaAtiva === aba.id ? "bold" : "normal",
-                            borderBottom: abaAtiva === aba.id ? "2px solid blue" : "none",
-                            padding: "8px 16px",
-                            cursor: "pointer"
-                        }}
-                    >
-                        {aba.label}
-                    </button>
-                ))}
+            <div className="overflow-x-auto rounded-xl border border-slate-200 bg-slate-50 p-1 shadow-sm">
+                <div className="flex min-w-max gap-1">
+                    {abas.map((aba) => (
+                        <button
+                            key={aba.id}
+                            type="button"
+                            onClick={() => setAbaAtiva(aba.id)}
+                            className={`rounded-lg px-4 py-3 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 ${abaAtiva === aba.id
+                                ? "bg-slate-950 text-white shadow-sm"
+                                : "text-slate-600 hover:bg-white hover:text-slate-950"
+                                }`}
+                        >
+                            {aba.label}
+                        </button>
+                    ))}
+                </div>
             </div>
 
             {/* Conteúdo das abas */}
-            <div>
+            <div className="min-w-0">
                 {abaAtiva === "dados" && (
                     <AbaDados dados={dados} setDados={setDados} />
                 )}
