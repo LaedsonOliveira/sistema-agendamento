@@ -67,18 +67,7 @@ export default function Sidebar() {
           >
             Dashboard
           </a>
-          <a
-            href="/configuracoes/meuNegocio?aba=servicos"
-            className="block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded transition-colors"
-          >
-            Serviços
-          </a>
-          <a
-            href="/configuracoes/meuNegocio?aba=barbeiros"
-            className="block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded transition-colors"
-          >
-            Funcionarios
-          </a>
+          
           <a
             href="#"
             className="block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded transition-colors"
