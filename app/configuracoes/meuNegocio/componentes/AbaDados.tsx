@@ -117,6 +117,7 @@ export default function AbaDados({ dados, setDados }: Props) {
               name="cep"
               value={dados.cep}
               onChange={handleChange}
+              className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
             />
           </label>
         </div>

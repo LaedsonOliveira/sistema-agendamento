@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Barbeiro } from "../types";
 
 interface Props {
@@ -87,7 +88,14 @@ export default function AbaBarbeiros({ barbeiros, setBarbeiros }: Props) {
                 <div>
                   <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-slate-100 text-center text-xs text-slate-400">
                     {barbeiro.foto ? (
-                      <img src={barbeiro.foto} alt={barbeiro.nome} />
+                      <Image
+                        src={barbeiro.foto}
+                        alt={barbeiro.nome}
+                        width={56}
+                        height={56}
+                        unoptimized
+                        className="h-full w-full object-cover"
+                      />
                     ) : (
                       <span>Sem foto</span>
                     )}

@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Estabelecimento {
+  id             String   @id @default(uuid())
+  slug           String   @unique
+  name           String
+  logoUrl        String?
+  banner         String?
+  primaryColor   String   @default("#00000000")
+  createAt       DateTime @default(now())
+  updateAt       DateTime
+  proprietarioId String
+
+  proprietarios Proprietario @relation(fields: [proprietarioId], references: [id], onDelete: Cascade)
+
+  servicos       Servico[]
+  profissionais  Profissional[]
+  agendadamentos Agendamento[]
+
+  @@index([slug])
+}
+
+model Proprietario {
+  id       String @id @default(uuid())
+  name     String
+  telefone String @unique
+  email    String @unique
+
+  estabelecimentos Estabelecimento[]
+
+  createAt DateTime @default(now())
+  updateAt DateTime
+}
+
+model Servico {
+  id        String  @id @default(uuid())
+  nome      String
+  descricao String?
+  preco     Decimal @db.Decimal(10, 2)
+  duracao   Int
+
+  estabelecimentoId String
+
+  estabelecimentos Estabelecimento @relation(fields: [estabelecimentoId], references: [id], onDelete: Cascade)
+  agendamentos     Agendamento[]
+}
+
+model Profissional {
+  id   String @id @default(uuid())
+  nome String
+
+  estabelecimentoId String
+  estabelecimento   Estabelecimento @relation(fields: [estabelecimentoId], references: [id], onDelete: Cascade)
+  aagendamento      Agendamento[]
+}
+
+model Agendamento {
+  id          String   @id @default(uuid())
+  clienteNome String
+  clienteFone String
+  descricao   String
+  dataHora    DateTime
+  preco       Decimal  @db.Decimal(10, 2)
+
+  estabelecimentoId String
+  estabelecimento   Estabelecimento @relation(fields: [estabelecimentoId], references: [id], onDelete: Cascade)
+
+  servicoId String
+  servico   Servico @relation(fields: [servicoId], references: [id])
+
+  profissionalId String
+  profissional   Profissional @relation(fields: [profissionalId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@index([profissionalId, dataHora])
+  @@index([estabelecimentoId, dataHora])
+}

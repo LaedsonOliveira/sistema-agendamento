@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { startTransition, useState, useEffect } from "react";
+import { Suspense } from "react";
 import {
     DadosNegocio,
     Servico,
@@ -61,7 +62,7 @@ const personalizacaoMock: Personalizacao = {
     whatsapp: "(81) 99999-9999"
 };
 
-export default function MeuNegocio() {
+function MeuNegocioConteudo() {
     const searchParams = useSearchParams();
     const [abaAtiva, setAbaAtiva] = useState("dados");
 
@@ -88,7 +89,7 @@ export default function MeuNegocio() {
     ];
 
     return (
-        <div className="mx-auto max-w-6xl space-y-8 pb-10 text-slate-900">
+        <div className="mx-auto min-w-0 max-w-6xl space-y-6 pb-10 text-slate-900 sm:space-y-8">
             <header className="space-y-2">
                 <h1 className="text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">Configurações do Negócio</h1>
                 <p className="max-w-2xl text-sm leading-6 text-slate-500">Gerencie as informações que seus clientes vão ver na página de agendamento</p>
@@ -145,5 +146,13 @@ export default function MeuNegocio() {
                 )}
             </div>
         </div>
+    );
+}
+
+export default function MeuNegocio() {
+    return (
+        <Suspense fallback={<div className="min-h-48" />}>
+            <MeuNegocioConteudo />
+        </Suspense>
     );
 }

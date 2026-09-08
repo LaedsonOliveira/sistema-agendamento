@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, ChangeEvent } from 'react';
+import Image from 'next/image';
 
 interface FormData {
   nome: string;
@@ -51,7 +52,7 @@ const Perfil: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto max-w-3xl pb-10 text-slate-900">
+    <div className="mx-auto min-w-0 max-w-3xl pb-10 text-slate-900">
       <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
         {/* Cabeçalho */}
         <div className="border-b border-slate-100 pb-6">
@@ -65,7 +66,14 @@ const Perfil: React.FC = () => {
           <div className="flex flex-col gap-4 border-b border-slate-100 pb-6 sm:flex-row sm:items-center">
             <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-slate-100 text-xs text-slate-400">
               {foto ? (
-                <img src={foto} alt="Foto de perfil" className="h-full w-full object-cover" />
+                <Image
+                  src={foto}
+                  alt="Foto de perfil"
+                  width={80}
+                  height={80}
+                  unoptimized
+                  className="h-full w-full object-cover"
+                />
               ) : (
                 <span>Sem foto</span>
               )}

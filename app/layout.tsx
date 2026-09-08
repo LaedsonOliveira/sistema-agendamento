@@ -18,18 +18,21 @@ export const metadata: Metadata = {
   description: "Agendamento de Salões, Babearias e estúdios de beleza",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html
-      lang="pt-br"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
+    <html lang="pt-BR">
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <div className="min-h-screen lg:flex">
+          <Sidebar />
 
-      <body className="flex">
-        <Sidebar />
-        <main className="flex-1 p-6">
-          {children}
-        </main>
+          <main className="min-h-screen min-w-0 flex-1 px-4 pb-8 pt-20 sm:px-6 sm:pt-8 lg:ml-64 lg:px-8">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );

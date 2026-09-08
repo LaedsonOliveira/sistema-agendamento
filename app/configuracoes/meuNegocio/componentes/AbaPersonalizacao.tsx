@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Image from "next/image";
 import { Personalizacao } from "../types";
 
 interface Props {
@@ -97,7 +98,14 @@ export default function AbaPersonalizacao({ personalizacao, setPersonalizacao }:
 
             <div className="relative space-y-3 px-6 pb-6 pt-12 text-center">
               {previewLogo ? (
-                <img src={previewLogo} alt="Logo" className="absolute left-1/2 top-0 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-white object-cover shadow-md" />
+                <Image
+                  src={previewLogo}
+                  alt="Logo"
+                  width={64}
+                  height={64}
+                  unoptimized
+                  className="absolute left-1/2 top-0 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-white object-cover shadow-md"
+                />
               ) : (
                 <div className="absolute left-1/2 top-0 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white bg-slate-100 text-xs text-slate-400 shadow-md">Sem logo</div>
               )}
@@ -122,7 +130,14 @@ export default function AbaPersonalizacao({ personalizacao, setPersonalizacao }:
             <div className="mt-4 flex items-center gap-4">
               <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-slate-100 text-center text-xs text-slate-400">
                 {previewLogo ? (
-                  <img src={previewLogo} alt="Logo" className="h-full w-full object-cover" />
+                  <Image
+                    src={previewLogo}
+                    alt="Logo"
+                    width={80}
+                    height={80}
+                    unoptimized
+                    className="h-full w-full object-cover"
+                  />
                 ) : (
                   <span>Sem logo</span>
                 )}
@@ -159,7 +174,16 @@ export default function AbaPersonalizacao({ personalizacao, setPersonalizacao }:
             <label className="text-sm font-semibold text-slate-950">Banner de Fundo</label>
             <div className="mt-4 flex items-center gap-4">
               <div className="aspect-[3/1] min-w-0 flex-1 items-center justify-center overflow-hidden rounded-lg bg-slate-100 text-xs text-slate-400">
-                {previewBanner && <img src={previewBanner} alt="Banner" className="h-full w-full object-cover" />}
+                {previewBanner && (
+                  <Image
+                    src={previewBanner}
+                    alt="Banner"
+                    width={600}
+                    height={200}
+                    unoptimized
+                    className="h-full w-full object-cover"
+                  />
+                )}
                 {!previewBanner && <span>Sem banner</span>}
               </div>
 

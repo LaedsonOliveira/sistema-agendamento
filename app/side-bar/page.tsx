@@ -13,7 +13,8 @@ export default function Sidebar() {
       {/* Botão Hamburguer - aparece apenas no mobile */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-gray-800 text-white rounded-lg shadow-lg hover:bg-gray-700 transition"
+        aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
+        className="fixed left-4 top-4 z-50 rounded-lg bg-gray-800 p-2 text-white shadow-lg transition hover:bg-gray-700 lg:hidden"
       >
         <svg
           className="w-6 h-6"
@@ -50,12 +51,10 @@ export default function Sidebar() {
       {/* Sidebar */}
       <aside
         className={`
-          fixed lg:relative z-50
-          w-64 bg-gray-100 h-screen shadow-md
+          fixed left-0 top-0 z-50 h-screen w-64 overflow-y-auto bg-gray-100 p-4 shadow-md
           transition-transform duration-300 ease-in-out
           ${isOpen ? "translate-x-0" : "-translate-x-full"}
           lg:translate-x-0
-          overflow-y-auto p-4
         `}
       >
         <h3 className="text-lg font-semibold text-gray-700 mb-4">Menu</h3>
@@ -67,7 +66,7 @@ export default function Sidebar() {
           >
             Dashboard
           </a>
-          
+
           <a
             href="#"
             className="block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded transition-colors"
