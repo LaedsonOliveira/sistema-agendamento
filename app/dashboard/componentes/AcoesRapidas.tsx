@@ -8,25 +8,21 @@ export default function AcoesRapidas() {
     {
       href: "/agendar/teste",
       label: "Novo Agendamento",
-      icone: "➕",
       descricao: "Criar um novo agendamento",
     },
     {
       href: "/agenda",
       label: "Ver Agenda",
-      icone: "📅",
       descricao: "Ver todos os agendamentos",
     },
     {
       href: "/financeiro",
       label: "Ver Financeiro",
-      icone: "💰",
       descricao: "Ver relatório financeiro",
     },
     {
       href: "/configuracoes/meuNegocio",
       label: "Configurações",
-      icone: "⚙️",
       descricao: "Configurar o negócio",
     },
   ];
@@ -44,7 +40,6 @@ export default function AcoesRapidas() {
             href={acao.href}
             className="flex flex-col items-center rounded-xl border border-slate-200 bg-slate-50 p-4 text-center transition hover:border-slate-950 hover:bg-white hover:shadow-md"
           >
-            <span className="text-2xl mb-2">{acao.icone}</span>
             <span className="text-sm font-medium text-slate-900">
               {acao.label}
             </span>

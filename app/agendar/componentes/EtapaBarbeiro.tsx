@@ -66,7 +66,7 @@ export default function EtapaBarbeiro({
                     className="mt-4 w-full rounded-lg px-6 py-3 text-white font-medium transition hover:opacity-90 disabled:opacity-50"
                     style={{ backgroundColor: cores.secondary }}
                 >
-                    Continuar →
+                    Continuar
                 </button>
             </form>
         </div>

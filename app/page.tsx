@@ -8,7 +8,7 @@ export default function Home() {
           Gestão para barbearias
         </p>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-          💈 Sistema de Agendamento
+          Sistema de Agendamento
         </h1>
         <p className="mt-4 text-base text-slate-600">
           Gerencie sua barbearia de forma simples

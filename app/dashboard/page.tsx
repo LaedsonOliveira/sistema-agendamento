@@ -156,26 +156,22 @@ export default function Dashboard() {
                     titulo="Agendamentos Hoje"
                     valor={resumo.agendamentosHoje}
                     tipo="numero"
-                    icone="📅"
                 />
                 <CardResumo
                     titulo="Faturamento Hoje"
                     valor={resumo.faturamentoHoje}
                     tipo="moeda"
-                    icone="💰"
                     destaque="positivo"
                 />
                 <CardResumo
                     titulo="Clientes Atendidos"
                     valor={resumo.clientesAtendidos}
                     tipo="numero"
-                    icone="👥"
                 />
                 <CardResumo
                     titulo="Próximo Agendamento"
                     valor={resumo.proximoAgendamento}
                     tipo="texto"
-                    icone="⏰"
                 />
             </div>
 

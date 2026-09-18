@@ -259,7 +259,7 @@ export default function Financeiro() {
             <div className="mb-6">
                 <h1 className="text-2xl font-bold text-slate-950">Financeiro</h1>
                 <p className="text-sm text-slate-500">
-                    Gerencie as finanças da sua barbearia
+                    Gerencie as finanças do seu negocio
                 </p>
             </div>
 
@@ -304,7 +304,6 @@ export default function Financeiro() {
                 setFiltroPeriodo={setFiltroPeriodo}
                 filtroStatus={filtroStatus}
                 setFiltroStatus={setFiltroStatus}
-                onNovaDespesa={() => setModalDespesaAberto(true)}
             />
 
             {/* ===== TABELA DE TRANSAÇÕES ===== */}

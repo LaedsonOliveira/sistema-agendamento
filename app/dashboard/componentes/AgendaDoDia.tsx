@@ -34,7 +34,7 @@ export default function AgendaDoDia({ agendamentos }: Props) {
                     href="/agenda"
                     className="text-sm font-medium text-slate-600 transition hover:text-slate-950"
                 >
-                    Ver completa →
+                    Ver completa
                 </Link>
             </div>
 

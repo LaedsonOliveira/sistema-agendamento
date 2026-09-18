@@ -7,7 +7,6 @@ interface Props {
     setFiltroPeriodo: (periodo: string) => void;
     filtroStatus: StatusTransacao | "todos";
     setFiltroStatus: (status: StatusTransacao | "todos") => void;
-    onNovaDespesa: () => void;
 }
 
 export default function Filtros({
@@ -15,7 +14,6 @@ export default function Filtros({
     setFiltroPeriodo,
     filtroStatus,
     setFiltroStatus,
-    onNovaDespesa,
 }: Props) {
     const periodos = [
         { valor: "hoje", label: "Hoje" },
@@ -34,14 +32,6 @@ export default function Filtros({
     return (
         <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
             <div className="flex flex-wrap items-center gap-4">
-                <button
-                    type="button"
-                    onClick={onNovaDespesa}
-                    className="rounded-lg bg-slate-950 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-slate-800"
-                >
-                    Nova despesa
-                </button>
-
                 {/* FILTRO DE PERÍODO */}
                 <div>
                     <label className="mb-1 block text-xs font-medium text-slate-500">

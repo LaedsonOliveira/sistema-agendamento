@@ -53,8 +53,8 @@ export default function EtapaHorario({
                 type="button"
                 onClick={() => onSelect(horario)}
                 className={`rounded-lg border-2 py-3 text-center transition hover:shadow-md ${selecionado === horario
-                    ? "text-white"
-                    : "border-slate-200 text-slate-700"
+                  ? "text-white"
+                  : "border-slate-200 text-slate-700"
                   }`}
                 style={{
                   backgroundColor:
@@ -83,7 +83,7 @@ export default function EtapaHorario({
             className="flex-1 rounded-lg px-6 py-3 text-white font-medium transition hover:opacity-90 disabled:opacity-50"
             style={{ backgroundColor: cores.secondary }}
           >
-            Continuar →
+            Continuar
           </button>
         </div>
       </form>
