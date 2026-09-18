@@ -60,12 +60,12 @@ export default function Sidebar() {
         <h3 className="text-lg font-semibold text-gray-700 mb-4">Menu</h3>
 
         <nav className="space-y-1">
-          <a
-            href="#"
+          <Link
+            href="/dashboard"
             className="block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded transition-colors"
           >
             Dashboard
-          </a>
+          </Link>
 
           <Link
             href="/financeiro"
