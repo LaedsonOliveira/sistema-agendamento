@@ -67,12 +67,12 @@ export default function Sidebar() {
             Dashboard
           </a>
 
-          <a
-            href="#"
+          <Link
+            href="/financeiro"
             className="block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded transition-colors"
           >
             Financeiro
-          </a>
+          </Link>
           <button
             onClick={() => setConfiguracoesAberto(!configuracoesAberto)}
             className={`flex w-full items-center justify-between rounded-lg px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 ${configuracoesAberto
