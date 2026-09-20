@@ -89,7 +89,7 @@ function MeuNegocioConteudo() {
     ];
 
     return (
-        <div className="mx-auto min-w-0 max-w-6xl space-y-6 pb-10 text-slate-900 sm:space-y-8">
+        <div className="mx-auto w-full max-w-6xl space-y-5 pb-10 text-slate-900 sm:space-y-8">
             <header className="space-y-2">
                 <h1 className="text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">Configurações do Negócio</h1>
                 <p className="max-w-2xl text-sm leading-6 text-slate-500">Gerencie as informações que seus clientes vão ver na página de agendamento</p>

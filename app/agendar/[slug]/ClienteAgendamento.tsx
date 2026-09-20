@@ -291,8 +291,8 @@ export default function ClienteAgendamento({ estabelecimento }: Props) {
                 className="h-24 w-24 rounded-full border-4 border-white object-cover shadow-lg"
               />
             ) : (
-              <div className="flex h-24 w-24 items-center justify-center rounded-full border-4 border-white bg-white/10 text-4xl shadow-lg">
-
+              <div className="flex h-24 w-24 items-center justify-center rounded-full border-4 border-white bg-white/10 text-4xl shadow-lg text-white">
+                ✂
               </div>
             )}
           </div>

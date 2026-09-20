@@ -19,16 +19,16 @@ export default function FiltrosAgenda({
     setFiltroStatus,
 }: Props) {
     return (
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
             {/* FILTRO PROFISSIONAL */}
-            <div className="flex items-center gap-2">
+            <div className="flex w-full flex-col gap-1 sm:w-auto sm:flex-row sm:items-center">
                 <label className="text-xs font-medium text-slate-500">
                     Profissional:
                 </label>
                 <select
                     value={filtroProfissional}
                     onChange={(e) => setFiltroProfissional(e.target.value)}
-                    className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm outline-none focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
+                    className="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm outline-none focus:border-slate-950 focus:ring-2 focus:ring-slate-200 sm:w-auto"
                 >
                     <option value="todos">Todos</option>
                     {profissionais.map((p) => (
@@ -40,14 +40,14 @@ export default function FiltrosAgenda({
             </div>
 
             {/* FILTRO STATUS */}
-            <div className="flex items-center gap-2">
+            <div className="flex w-full flex-col gap-1 sm:w-auto sm:flex-row sm:items-center">
                 <label className="text-xs font-medium text-slate-500">Status:</label>
                 <select
                     value={filtroStatus}
                     onChange={(e) =>
                         setFiltroStatus(e.target.value as StatusAgendamento | "todos")
                     }
-                    className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm outline-none focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
+                    className="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm outline-none focus:border-slate-950 focus:ring-2 focus:ring-slate-200 sm:w-auto"
                 >
                     <option value="todos">Todos</option>
                     <option value="Pendente">Pendente</option>

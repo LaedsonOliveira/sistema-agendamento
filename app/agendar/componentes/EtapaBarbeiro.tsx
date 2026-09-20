@@ -27,12 +27,22 @@ export default function EtapaBarbeiro({
 
     return (
         <div>
-            <h2 className="text-xl font-bold text-slate-900 mb-2">
-                Escolha o Profissional
-            </h2>
-            <p className="text-sm text-slate-500 mb-6">
-                Selecione o barbeiro que você prefere
-            </p>
+            <div className="mb-5 flex items-center gap-3">
+                <div
+                    className="flex h-10 w-10 items-center justify-center rounded-xl text-lg shadow-sm"
+                    style={{ backgroundColor: `${cores.secondary}1A`, color: cores.secondary }}
+                >
+                    ✂️
+                </div>
+                <div>
+                    <h2 className="text-xl font-bold text-slate-900">
+                        Escolha o Profissional
+                    </h2>
+                    <p className="text-sm text-slate-500">
+                        Selecione o barbeiro que você prefere
+                    </p>
+                </div>
+            </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid gap-3 sm:grid-cols-2">
@@ -41,19 +51,21 @@ export default function EtapaBarbeiro({
                             key={profissional.id}
                             type="button"
                             onClick={() => onSelect(profissional)}
-                            className={`rounded-xl border-2 p-4 text-center transition hover:shadow-md ${selecionado?.id === profissional.id
-                                ? "border-2"
-                                : "border-slate-200"
+                            className={`rounded-2xl border p-4 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${selecionado?.id === profissional.id
+                                    ? "bg-slate-900 text-white shadow-sm"
+                                    : "border-slate-200 bg-slate-50 text-slate-900 hover:border-slate-300"
                                 }`}
-                            style={{
-                                borderColor:
-                                    selecionado?.id === profissional.id
-                                        ? cores.secondary
-                                        : undefined,
-                            }}
+                            style={
+                                selecionado?.id === profissional.id
+                                    ? { borderColor: cores.secondary, boxShadow: `0 10px 25px -18px ${cores.secondary}` }
+                                    : undefined
+                            }
                         >
-                            <div className="text-3xl mb-1">{profissional.nome.charAt(0)}</div>
-                            <span className="text-sm font-medium text-slate-900">
+                            <div className={`mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full text-lg font-semibold ${selecionado?.id === profissional.id ? "bg-white/10 text-white" : "bg-white text-slate-700"
+                                }`}>
+                                {profissional.nome.charAt(0)}
+                            </div>
+                            <span className="text-sm font-semibold">
                                 {profissional.nome}
                             </span>
                         </button>
@@ -63,7 +75,7 @@ export default function EtapaBarbeiro({
                 <button
                     type="submit"
                     disabled={!selecionado}
-                    className="mt-4 w-full rounded-lg px-6 py-3 text-white font-medium transition hover:opacity-90 disabled:opacity-50"
+                    className="mt-4 w-full rounded-xl px-6 py-3 text-white font-medium transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
                     style={{ backgroundColor: cores.secondary }}
                 >
                     Continuar

@@ -43,31 +43,29 @@ export default function VisaoDia({ data, agendamentos, onSelecionar }: Props) {
                     onClick={() => onSelecionar(a)}
                     className="w-full rounded-xl border border-slate-200 bg-white p-4 text-left shadow-sm transition hover:border-slate-950 hover:shadow-md"
                 >
-                    <div className="flex flex-wrap items-center gap-4">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                         {/* HORÁRIO */}
-                        <div className="flex flex-col items-center justify-center rounded-lg bg-slate-950 px-4 py-2 text-white">
+                        <div className="flex flex-col items-center justify-center rounded-lg bg-slate-950 px-4 py-2 text-white sm:min-w-[90px]">
                             <span className="text-lg font-bold">{a.horario}</span>
                         </div>
 
                         {/* INFO */}
-                        <div className="flex-1">
-                            <div className="flex flex-wrap items-center gap-2">
+                        <div className="min-w-0 flex-1">
+                            <div className="flex flex-wrap items-center gap-1.5 text-sm sm:gap-2">
                                 <span className="font-semibold text-slate-900">
                                     {a.clienteNome}
                                 </span>
                                 <span className="text-slate-400">·</span>
-                                <span className="text-sm text-slate-600">{a.servicoNome}</span>
+                                <span className="text-slate-600">{a.servicoNome}</span>
                                 <span className="text-slate-400">·</span>
-                                <span className="text-sm text-slate-600">
-                                    {a.profissionalNome}
-                                </span>
+                                <span className="text-slate-600">{a.profissionalNome}</span>
                             </div>
                             <p className="mt-1 text-xs text-slate-500">{a.clienteFone}</p>
                         </div>
 
                         {/* VALOR + STATUS */}
-                        <div className="flex items-center gap-4">
-                            <span className="text-lg font-bold text-slate-900">
+                        <div className="flex w-full flex-col items-start gap-2 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
+                            <span className="text-base font-bold text-slate-900 sm:text-lg">
                                 R$ {a.valor.toFixed(2).replace(".", ",")}
                             </span>
                             <span

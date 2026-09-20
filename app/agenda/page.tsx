@@ -261,18 +261,18 @@ export default function Agenda() {
     // RENDER
     // ========================================
     return (
-        <div className="p-6 max-w-7xl mx-auto">
+        <div className="mx-auto w-full max-w-7xl px-0 py-4 sm:px-2 sm:py-6">
             {/* ===== CABEÇALHO ===== */}
-            <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+            <div className="mb-5 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                    <h1 className="text-2xl font-bold text-slate-950">Agenda</h1>
-                    <p className="text-sm text-slate-500">
+                    <h1 className="text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">Agenda</h1>
+                    <p className="mt-1 text-sm text-slate-500">
                         Gerencie todos os agendamentos da sua barbearia
                     </p>
                 </div>
                 <Link
                     href="/agendar/teste"
-                    className="rounded-lg bg-slate-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-700"
+                    className="w-full rounded-lg bg-slate-950 px-4 py-2.5 text-center text-sm font-medium text-white transition hover:bg-slate-700 sm:w-auto"
                 >
                     + Novo Agendamento
                 </Link>
@@ -280,8 +280,8 @@ export default function Agenda() {
 
             {/* ===== NAVEGAÇÃO DE DATA ===== */}
             <div className="mb-6 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                    <div className="flex items-center gap-2">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex flex-wrap items-center gap-2">
                         <button
                             onClick={handleAnterior}
                             className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
@@ -308,14 +308,14 @@ export default function Agenda() {
             </div>
 
             {/* ===== VISUALIZAÇÃO + FILTROS ===== */}
-            <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+            <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 {/* VISUALIZAÇÃO */}
-                <div className="flex gap-1 rounded-lg bg-slate-100 p-1">
+                <div className="flex w-full gap-1 rounded-lg bg-slate-100 p-1 sm:w-auto">
                     {(["dia", "semana", "mes"] as const).map((v) => (
                         <button
                             key={v}
                             onClick={() => setVisualizacao(v)}
-                            className={`rounded-lg px-4 py-1.5 text-sm font-medium capitalize transition ${visualizacao === v
+                            className={`flex-1 rounded-lg px-3 py-1.5 text-sm font-medium capitalize transition sm:flex-none ${visualizacao === v
                                 ? "bg-slate-950 text-white"
                                 : "text-slate-600 hover:bg-slate-200"
                                 }`}

@@ -29,12 +29,12 @@ export default function TabelaTransacoes({
         .reduce((acc, t) => acc + t.valor, 0);
 
     return (
-        <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            <div className="mb-4 flex items-center justify-between">
+        <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+            <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <h2 className="text-lg font-semibold text-slate-950">
                     Transações
                 </h2>
-                <span className="text-sm text-slate-500">
+                <span className="text-xs text-slate-500 sm:text-sm">
                     {transacoes.length} transações | Total pago:{" "}
                     <span className="font-semibold text-green-600">
                         R$ {totalPago.toFixed(2).replace(".", ",")}
@@ -47,16 +47,16 @@ export default function TabelaTransacoes({
                     Nenhuma transação encontrada para este período.
                 </p>
             ) : (
-                <div className="overflow-x-auto">
-                    <table className="w-full min-w-[700px] text-sm">
+                <div className="overflow-x-auto -mx-1 px-1">
+                    <table className="w-full min-w-[660px] text-sm">
                         <thead>
                             <tr className="border-b border-slate-200 text-left">
-                                <th className="pb-3 font-medium text-slate-500">Data</th>
-                                <th className="pb-3 font-medium text-slate-500">Cliente</th>
-                                <th className="pb-3 font-medium text-slate-500">Serviço</th>
-                                <th className="pb-3 font-medium text-slate-500">Profissional</th>
-                                <th className="pb-3 font-medium text-slate-500">Valor</th>
-                                <th className="pb-3 font-medium text-slate-500">Status</th>
+                                <th className="pb-3 pr-2 font-medium text-slate-500">Data</th>
+                                <th className="pb-3 pr-2 font-medium text-slate-500">Cliente</th>
+                                <th className="pb-3 pr-2 font-medium text-slate-500">Serviço</th>
+                                <th className="pb-3 pr-2 font-medium text-slate-500">Profissional</th>
+                                <th className="pb-3 pr-2 font-medium text-slate-500">Valor</th>
+                                <th className="pb-3 pr-2 font-medium text-slate-500">Status</th>
                                 <th className="pb-3 font-medium text-slate-500">Ações</th>
                             </tr>
                         </thead>
@@ -66,20 +66,20 @@ export default function TabelaTransacoes({
                                     key={t.id}
                                     className="border-b border-slate-100 last:border-0 hover:bg-slate-50"
                                 >
-                                    <td className="py-3 text-slate-700">
+                                    <td className="py-3 pr-2 text-slate-700">
                                         {format(parseISO(t.data), "dd/MM/yyyy", { locale: ptBR })}
                                     </td>
-                                    <td className="py-3 font-medium text-slate-900">
+                                    <td className="py-3 pr-2 font-medium text-slate-900">
                                         {t.clienteNome}
                                     </td>
-                                    <td className="py-3 text-slate-700">{t.servicoNome}</td>
-                                    <td className="py-3 text-slate-700">{t.profissionalNome}</td>
-                                    <td className="py-3 font-semibold text-slate-900">
+                                    <td className="py-3 pr-2 text-slate-700">{t.servicoNome}</td>
+                                    <td className="py-3 pr-2 text-slate-700">{t.profissionalNome}</td>
+                                    <td className="py-3 pr-2 font-semibold text-slate-900">
                                         R$ {t.valor.toFixed(2).replace(".", ",")}
                                     </td>
-                                    <td className="py-3">
+                                    <td className="py-3 pr-2">
                                         <span
-                                            className={`rounded-full px-2 py-1 text-xs font-medium ${getStatusBadge(
+                                            className={`rounded-full px-2 py-1 text-[11px] font-medium ${getStatusBadge(
                                                 t.status
                                             )}`}
                                         >
@@ -87,18 +87,18 @@ export default function TabelaTransacoes({
                                         </span>
                                     </td>
                                     <td className="py-3">
-                                        <div className="flex gap-2">
+                                        <div className="flex flex-wrap gap-2">
                                             {t.status === "Pendente" && (
                                                 <button
                                                     onClick={() => onMarcarComoPago(t.id)}
-                                                    className="rounded-lg bg-green-600 px-2 py-1 text-xs font-medium text-white transition hover:bg-green-700"
+                                                    className="rounded-lg bg-green-600 px-2 py-1.5 text-[11px] font-medium text-white transition hover:bg-green-700"
                                                 >
                                                     Pagar
                                                 </button>
                                             )}
                                             <button
                                                 onClick={() => onEditar(t)}
-                                                className="rounded-lg bg-slate-200 px-2 py-1 text-xs font-medium text-slate-700 transition hover:bg-slate-300"
+                                                className="rounded-lg bg-slate-200 px-2 py-1.5 text-[11px] font-medium text-slate-700 transition hover:bg-slate-300"
                                             >
                                                 Editar
                                             </button>

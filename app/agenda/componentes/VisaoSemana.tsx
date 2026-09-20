@@ -41,10 +41,10 @@ export default function VisaoSemana({ data, agendamentos, onSelecionar }: Props)
 
     return (
         <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
-            <table className="w-full min-w-[800px] text-sm">
+            <table className="w-full min-w-[720px] text-sm sm:min-w-[760px]">
                 <thead>
                     <tr className="border-b border-slate-200 bg-slate-50">
-                        <th className="px-3 py-3 text-left font-medium text-slate-500 w-20">
+                        <th className="w-20 px-3 py-3 text-left font-medium text-slate-500">
                             Hora
                         </th>
                         {diasDaSemana.map((dia) => {
@@ -52,14 +52,14 @@ export default function VisaoSemana({ data, agendamentos, onSelecionar }: Props)
                             return (
                                 <th
                                     key={dia.toISOString()}
-                                    className={`px-3 py-3 text-center font-medium ${isHoje ? "text-slate-950" : "text-slate-500"
+                                    className={`px-2 py-3 text-center font-medium sm:px-3 ${isHoje ? "text-slate-950" : "text-slate-500"
                                         }`}
                                 >
-                                    <div className="text-xs uppercase">
+                                    <div className="text-[10px] uppercase sm:text-xs">
                                         {format(dia, "EEE", { locale: ptBR })}
                                     </div>
                                     <div
-                                        className={`text-lg font-bold ${isHoje ? "text-slate-950" : "text-slate-700"
+                                        className={`text-base font-bold sm:text-lg ${isHoje ? "text-slate-950" : "text-slate-700"
                                             }`}
                                     >
                                         {format(dia, "dd")}
@@ -72,7 +72,7 @@ export default function VisaoSemana({ data, agendamentos, onSelecionar }: Props)
                 <tbody>
                     {HORARIOS.map((horario) => (
                         <tr key={horario} className="border-b border-slate-100 last:border-0">
-                            <td className="px-3 py-2 text-xs font-medium text-slate-500">
+                            <td className="px-3 py-2 text-[11px] font-medium text-slate-500 sm:text-xs">
                                 {horario}
                             </td>
                             {diasDaSemana.map((dia) => {
@@ -86,19 +86,19 @@ export default function VisaoSemana({ data, agendamentos, onSelecionar }: Props)
                                             <button
                                                 key={a.id}
                                                 onClick={() => onSelecionar(a)}
-                                                className={`w-full rounded-lg p-2 text-left text-xs transition hover:opacity-80 ${a.status === "Pago"
-                                                        ? "bg-green-100 text-green-800"
-                                                        : a.status === "Pendente"
-                                                            ? "bg-yellow-100 text-yellow-800"
-                                                            : a.status === "Cancelado"
-                                                                ? "bg-red-100 text-red-800"
-                                                                : "bg-blue-100 text-blue-800"
+                                                className={`w-full rounded-lg p-2 text-left text-[10px] transition hover:opacity-80 sm:text-xs ${a.status === "Pago"
+                                                    ? "bg-green-100 text-green-800"
+                                                    : a.status === "Pendente"
+                                                        ? "bg-yellow-100 text-yellow-800"
+                                                        : a.status === "Cancelado"
+                                                            ? "bg-red-100 text-red-800"
+                                                            : "bg-blue-100 text-blue-800"
                                                     }`}
                                             >
-                                                <div className="font-semibold truncate">
+                                                <div className="truncate font-semibold">
                                                     {a.clienteNome}
                                                 </div>
-                                                <div className="truncate text-[10px]">
+                                                <div className="truncate text-[9px] sm:text-[10px]">
                                                     {a.servicoNome}
                                                 </div>
                                             </button>

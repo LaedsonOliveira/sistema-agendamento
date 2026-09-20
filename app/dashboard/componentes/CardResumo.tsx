@@ -25,16 +25,16 @@ export default function CardResumo({
     destaque === "positivo"
       ? "text-green-600"
       : destaque === "negativo"
-      ? "text-red-600"
-      : "text-slate-950";
+        ? "text-red-600"
+        : "text-slate-950";
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-      <div className="flex items-center justify-between mb-2">
-        <p className="text-xs font-medium text-slate-500">{titulo}</p>
-        {icone && <span className="text-lg">{icone}</span>}
+    <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-sm sm:p-4">
+      <div className="mb-2 flex items-center justify-between gap-2">
+        <p className="text-[11px] font-medium uppercase tracking-[0.08em] text-slate-500 sm:text-xs">{titulo}</p>
+        {icone && <span className="text-base sm:text-lg">{icone}</span>}
       </div>
-      <p className={`text-xl font-bold ${corDestaque}`}>{valorFormatado}</p>
+      <p className={`text-lg font-bold sm:text-xl ${corDestaque}`}>{valorFormatado}</p>
     </div>
   );
 }

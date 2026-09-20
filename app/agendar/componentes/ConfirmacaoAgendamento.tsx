@@ -31,9 +31,12 @@ export default function ConfirmacaoAgendamento({
 
     return (
         <div className="text-center">
-            <div className="mb-4 flex justify-center">
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100 text-4xl">
-                    OK
+            <div className="mb-5 flex justify-center">
+                <div
+                    className="flex h-20 w-20 items-center justify-center rounded-full text-3xl shadow-sm"
+                    style={{ backgroundColor: `${cores.secondary}18`, color: cores.secondary }}
+                >
+                    ✓
                 </div>
             </div>
 
@@ -44,8 +47,8 @@ export default function ConfirmacaoAgendamento({
                 Seu agendamento foi realizado com sucesso
             </p>
 
-            <div className="mt-6 rounded-xl bg-slate-50 p-6 text-left">
-                <h3 className="mb-3 text-sm font-medium text-slate-700">
+            <div className="mt-6 rounded-2xl bg-slate-50 p-5 text-left shadow-sm ring-1 ring-slate-200 sm:p-6">
+                <h3 className="mb-3 text-sm font-semibold uppercase tracking-[0.08em] text-slate-500">
                     Detalhes do Agendamento
                 </h3>
                 <div className="space-y-3">
@@ -82,25 +85,25 @@ export default function ConfirmacaoAgendamento({
                 <p className="text-sm text-slate-500">
                     Você receberá uma confirmação no WhatsApp
                 </p>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="mt-1 text-xs text-slate-400">
                     Em breve o profissional confirmará seu horário
                 </p>
-                <p className="text-xs text-slate-400 mt-1">
-                    {estabelecimento.name} - {estabelecimento.primaryColor}
+                <p className="mt-1 text-xs text-slate-400">
+                    {estabelecimento.name}
                 </p>
             </div>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <button
                     onClick={() => window.location.reload()}
-                    className="flex-1 rounded-lg px-6 py-3 text-white font-medium transition hover:opacity-90"
+                    className="flex-1 rounded-xl px-6 py-3 text-white font-medium transition hover:opacity-90"
                     style={{ backgroundColor: cores.secondary }}
                 >
                     Novo Agendamento
                 </button>
                 <button
                     onClick={onVoltar}
-                    className="flex-1 rounded-lg border border-slate-300 px-6 py-3 font-medium text-slate-700 transition hover:bg-slate-50"
+                    className="flex-1 rounded-xl border border-slate-300 px-6 py-3 font-medium text-slate-700 transition hover:bg-slate-50"
                 >
                     Voltar
                 </button>

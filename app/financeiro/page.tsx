@@ -254,17 +254,19 @@ export default function Financeiro() {
     // RENDER
     // ========================================
     return (
-        <div className="p-6 max-w-7xl mx-auto">
+        <div className="mx-auto w-full max-w-7xl px-0 py-4 sm:px-2 sm:py-6">
             {/* ===== CABEÇALHO ===== */}
-            <div className="mb-6">
-                <h1 className="text-2xl font-bold text-slate-950">Financeiro</h1>
-                <p className="text-sm text-slate-500">
-                    Gerencie as finanças do seu negocio
+            <div className="mb-5 sm:mb-6">
+                <h1 className="text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">
+                    Financeiro
+                </h1>
+                <p className="mt-1 text-sm text-slate-500">
+                    Gerencie as finanças do seu negócio
                 </p>
             </div>
 
             {/* ===== CARDS DE RESUMO ===== */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
+            <div className="mb-6 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:grid-cols-6">
                 <CardResumo
                     titulo="Faturamento do Mês"
                     valor={resumo.faturamentoMes}
