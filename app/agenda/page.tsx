@@ -13,8 +13,9 @@ import {
     endOfWeek,
     startOfMonth,
     endOfMonth,
-    isSameDay,
-    isSameMonth,
+    startOfDay,
+    endOfDay,
+    isWithinInterval,
     parseISO,
 } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -23,7 +24,9 @@ import VisaoSemana from "./componentes/VisaoSemana";
 import VisaoMes from "./componentes/VisaoMes";
 import FiltrosAgenda from "./componentes/FiltrosAgenda";
 import ModalDetalhes from "./componentes/ModalDetalhes";
-import { Agendamento, Profissional, StatusAgendamento } from "./types/agenda";
+import ModalEncaixe from "./componentes/ModalEncaixe"; // ← NOVO
+import BotaoEncaixe from "./componentes/BotaoEncaixe"; // ← NOVO
+import { Agendamento, HorarioFuncionamento, Profissional, Servico, StatusAgendamento } from "./types/agenda";
 
 // ========================================
 // DADOS MOCKADOS (FUTURO: Prisma)
@@ -34,55 +37,79 @@ const PROFISSIONAIS_MOCK: Profissional[] = [
     { id: "3", nome: "Carlos Oliveira" },
 ];
 
+// ← NOVO: Serviços mockados para o encaixe
+const SERVICOS_MOCK: Servico[] = [
+    { id: "1", nome: "Corte", descricao: "Corte masculino", preco: 40, duracao: 30 },
+    { id: "2", nome: "Barba", descricao: "Barba completa", preco: 30, duracao: 20 },
+    { id: "3", nome: "Corte + Barba", descricao: "Combo", preco: 60, duracao: 50 },
+    { id: "4", nome: "Pezinho", descricao: "Acabamento", preco: 15, duracao: 15 },
+    { id: "5", nome: "Platinado", descricao: "Descoloração", preco: 120, duracao: 90 },
+];
+
+const HORARIOS_FUNCIONAMENTO_MOCK: HorarioFuncionamento[] = [
+    { dia: "segunda", ativo: true, abertura: "09:00", fechamento: "20:00", almocoInicio: "12:00", almocoFim: "13:00" },
+    { dia: "terca", ativo: true, abertura: "09:00", fechamento: "20:00", almocoInicio: "12:00", almocoFim: "13:00" },
+    { dia: "quarta", ativo: true, abertura: "09:00", fechamento: "20:00", almocoInicio: "12:00", almocoFim: "13:00" },
+    { dia: "quinta", ativo: true, abertura: "09:00", fechamento: "20:00", almocoInicio: "12:00", almocoFim: "13:00" },
+    { dia: "sexta", ativo: true, abertura: "09:00", fechamento: "20:00", almocoInicio: "12:00", almocoFim: "13:00" },
+    { dia: "sabado", ativo: true, abertura: "09:00", fechamento: "18:00" },
+    { dia: "domingo", ativo: false, abertura: "09:00", fechamento: "14:00" },
+];
+
+const dataMock = (diasAPartirDeHoje = 0) => addDays(new Date(), diasAPartirDeHoje).toISOString();
+
 const AGENDAMENTOS_MOCK: Agendamento[] = [
-    // Hoje
     {
         id: "1",
-        data: new Date().toISOString(),
+        data: dataMock(),
         horario: "09:00",
-        clienteNome: "João Silva",
-        clienteFone: "(81) 99999-9999",
+        clienteNome: "Lucas Mendes",
+        clienteFone: "(11) 99999-1111",
         servicoNome: "Corte",
         profissionalId: "1",
         profissionalNome: "João Silva",
         valor: 40,
+        duracao: 30,
         status: "Pago",
     },
     {
         id: "2",
-        data: new Date().toISOString(),
+        data: dataMock(),
         horario: "10:30",
-        clienteNome: "Pedro Santos",
-        clienteFone: "(81) 98888-8888",
-        servicoNome: "Barba",
+        clienteNome: "Rafael Souza",
+        clienteFone: "(11) 98888-2222",
+        servicoNome: "Corte + Barba",
         profissionalId: "2",
         profissionalNome: "Pedro Santos",
-        valor: 30,
+        valor: 60,
+        duracao: 50,
         status: "Pendente",
     },
     {
         id: "3",
-        data: new Date().toISOString(),
-        horario: "11:00",
-        clienteNome: "Carlos Oliveira",
-        clienteFone: "(81) 97777-7777",
-        servicoNome: "Corte + Barba",
-        profissionalId: "1",
-        profissionalNome: "João Silva",
-        valor: 60,
-        status: "Pago",
+        data: dataMock(1),
+        horario: "14:00",
+        clienteNome: "Bruno Alves",
+        clienteFone: "(11) 97777-3333",
+        servicoNome: "Barba",
+        profissionalId: "3",
+        profissionalNome: "Carlos Oliveira",
+        valor: 30,
+        duracao: 20,
+        status: "Finalizado",
     },
     {
         id: "4",
-        data: new Date().toISOString(),
-        horario: "14:00",
-        clienteNome: "Ana Paula",
-        clienteFone: "(81) 96666-6666",
-        servicoNome: "Corte",
-        profissionalId: "2",
-        profissionalNome: "Pedro Santos",
-        valor: 40,
-        status: "Pago",
+        data: dataMock(-1),
+        horario: "16:00",
+        clienteNome: "Felipe Costa",
+        clienteFone: "(11) 96666-4444",
+        servicoNome: "Pezinho",
+        profissionalId: "1",
+        profissionalNome: "João Silva",
+        valor: 15,
+        duracao: 15,
+        status: "Cancelado",
     },
     {
         id: "5",
@@ -124,7 +151,7 @@ const AGENDAMENTOS_MOCK: Agendamento[] = [
     {
         id: "8",
         data: addDays(new Date(), 1).toISOString(),
-        horario: "14:00",
+        horario: "12:30",
         clienteNome: "Bruno Alves",
         clienteFone: "(81) 92222-2222",
         servicoNome: "Corte",
@@ -196,6 +223,9 @@ export default function Agenda() {
     const [filtroStatus, setFiltroStatus] = useState<StatusAgendamento | "todos">("todos");
     const [agendamentoSelecionado, setAgendamentoSelecionado] = useState<Agendamento | null>(null);
 
+    // ← NOVO: Estado do modal de encaixe
+    const [modalEncaixeAberto, setModalEncaixeAberto] = useState(false);
+
     // ========================================
     // FILTRAR AGENDAMENTOS
     // ========================================
@@ -207,6 +237,23 @@ export default function Agenda() {
             return profissionalOk && statusOk;
         });
     }, [agendamentos, filtroProfissional, filtroStatus]);
+
+    const quantidadeNoPeriodo = useMemo(() => {
+        const inicio = visualizacao === "dia"
+            ? startOfDay(dataAtual)
+            : visualizacao === "semana"
+                ? startOfWeek(dataAtual, { locale: ptBR })
+                : startOfMonth(dataAtual);
+        const fim = visualizacao === "dia"
+            ? endOfDay(dataAtual)
+            : visualizacao === "semana"
+                ? endOfWeek(dataAtual, { locale: ptBR })
+                : endOfMonth(dataAtual);
+
+        return agendamentosFiltrados.filter((agendamento) =>
+            isWithinInterval(parseISO(agendamento.data), { start: inicio, end: fim })
+        ).length;
+    }, [agendamentosFiltrados, dataAtual, visualizacao]);
 
     // ========================================
     // NAVEGAÇÃO DE DATA
@@ -257,6 +304,37 @@ export default function Agenda() {
         }
     };
 
+    // ← NOVO: Criar encaixe
+    const handleCriarEncaixe = (encaixe: {
+        clienteNome: string;
+        clienteFone: string;
+        servicoNome: string;
+        servicoId: string;
+        profissionalId: string;
+        profissionalNome: string;
+        data: string;
+        horario: string;
+        duracao: number;
+        valor: number;
+    }) => {
+        const novo: Agendamento = {
+            id: Date.now().toString(),
+            data: encaixe.data,
+            horario: encaixe.horario,
+            clienteNome: encaixe.clienteNome,
+            clienteFone: encaixe.clienteFone,
+            servicoNome: encaixe.servicoNome,
+            servicoId: encaixe.servicoId,
+            profissionalId: encaixe.profissionalId,
+            profissionalNome: encaixe.profissionalNome,
+            valor: encaixe.valor,
+            duracao: encaixe.duracao,
+            status: "Pendente",
+        };
+        setAgendamentos((prev) => [...prev, novo]);
+        setModalEncaixeAberto(false);
+    };
+
     // ========================================
     // RENDER
     // ========================================
@@ -270,46 +348,59 @@ export default function Agenda() {
                         Gerencie todos os agendamentos da sua barbearia
                     </p>
                 </div>
-                <Link
-                    href="/agendar/teste"
-                    className="w-full rounded-lg bg-slate-950 px-4 py-2.5 text-center text-sm font-medium text-white transition hover:bg-slate-700 sm:w-auto"
-                >
-                    + Novo Agendamento
-                </Link>
+                <div className="flex flex-col gap-2 sm:flex-row">
+                    <BotaoEncaixe onClick={() => setModalEncaixeAberto(true)} />
+                    <Link
+                        href="/agendar/teste"
+                        className="w-full rounded-lg bg-slate-950 px-4 py-2.5 text-center text-sm font-medium text-white transition hover:bg-slate-700 sm:w-auto"
+                    >
+                        + Novo Agendamento
+                    </Link>
+                </div>
             </div>
 
             {/* ===== NAVEGAÇÃO DE DATA ===== */}
             <div className="mb-6 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <div className="flex flex-wrap items-center gap-2">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
+                    <div className="grid grid-cols-[2.75rem_1fr_2.75rem] items-center gap-2 sm:min-w-[27rem]">
                         <button
                             onClick={handleAnterior}
-                            className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+                            aria-label="Ver período anterior"
+                            title="Período anterior"
+                            className="flex aspect-square items-center justify-center rounded-lg border border-slate-300 text-lg font-semibold text-slate-700 transition hover:bg-slate-50"
                         >
-                            ← Anterior
+                            ←
                         </button>
-                        <button
-                            onClick={handleHoje}
-                            className="rounded-lg bg-slate-950 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-slate-700"
-                        >
-                            Hoje
-                        </button>
+
+                        <div className="flex min-w-0 flex-col items-center gap-1">
+                            <p className="text-center text-sm font-semibold capitalize text-slate-900">
+                                {tituloData}
+                            </p>
+                            <span className="text-xs text-slate-500">
+                                {quantidadeNoPeriodo} {quantidadeNoPeriodo === 1 ? "agendamento" : "agendamentos"}
+                            </span>
+                            <button
+                                onClick={handleHoje}
+                                className="rounded-md bg-slate-950 px-3 py-1 text-xs font-medium text-white transition hover:bg-slate-700"
+                            >
+                                Hoje
+                            </button>
+                        </div>
+
                         <button
                             onClick={handleProximo}
-                            className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+                            aria-label="Ver próximo período"
+                            title="Próximo período"
+                            className="flex aspect-square items-center justify-center rounded-lg border border-slate-300 text-lg font-semibold text-slate-700 transition hover:bg-slate-50"
                         >
-                            Próximo
+                            →
                         </button>
                     </div>
-                    <p className="text-sm font-semibold capitalize text-slate-900">
-                        {tituloData}
-                    </p>
                 </div>
             </div>
 
             {/* ===== VISUALIZAÇÃO + FILTROS ===== */}
             <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                {/* VISUALIZAÇÃO */}
                 <div className="flex w-full gap-1 rounded-lg bg-slate-100 p-1 sm:w-auto">
                     {(["dia", "semana", "mes"] as const).map((v) => (
                         <button
@@ -325,7 +416,6 @@ export default function Agenda() {
                     ))}
                 </div>
 
-                {/* FILTROS */}
                 <FiltrosAgenda
                     profissionais={PROFISSIONAIS_MOCK}
                     filtroProfissional={filtroProfissional}
@@ -367,6 +457,18 @@ export default function Agenda() {
                     onFechar={() => setAgendamentoSelecionado(null)}
                     onAlterarStatus={handleAlterarStatus}
                     onExcluir={handleExcluir}
+                />
+            )}
+
+            {/* ===== MODAL DE ENCAIXE ===== */}
+            {modalEncaixeAberto && (
+                <ModalEncaixe
+                    agendamentos={agendamentos}
+                    profissionais={PROFISSIONAIS_MOCK}
+                    servicos={SERVICOS_MOCK}
+                    horariosFuncionamento={HORARIOS_FUNCIONAMENTO_MOCK}
+                    onFechar={() => setModalEncaixeAberto(false)}
+                    onCriar={handleCriarEncaixe}
                 />
             )}
         </div>

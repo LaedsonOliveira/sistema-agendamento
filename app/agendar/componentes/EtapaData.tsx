@@ -1,6 +1,14 @@
 "use client";
 
-import { format, addDays, getDay, isSameDay, startOfToday } from "date-fns";
+import { useState } from "react";
+import {
+  format,
+  addDays,
+  getDay,
+  isSameDay,
+  startOfToday,
+  subDays,
+} from "date-fns";
 
 interface Props {
   dataSelecionada: Date | null;
@@ -17,6 +25,8 @@ export default function EtapaData({
   onBack,
   cores,
 }: Props) {
+  const [janelaInicio, setJanelaInicio] = useState(() => startOfToday());
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (dataSelecionada) onNext();
@@ -24,7 +34,9 @@ export default function EtapaData({
 
   const diasDaSemana = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
   const hoje = startOfToday();
-  const dias = Array.from({ length: 7 }, (_, i) => addDays(hoje, i));
+  const dias = Array.from({ length: 7 }, (_, i) => addDays(janelaInicio, i));
+  const fimDaJanela = addDays(janelaInicio, 6);
+  const podeVoltar = janelaInicio > hoje;
 
   return (
     <div>
@@ -34,6 +46,44 @@ export default function EtapaData({
       <p className="text-sm text-slate-500 mb-6">
         Selecione o dia para o agendamento
       </p>
+
+      <div className="mb-5 rounded-2xl border border-slate-200 bg-slate-50/80 p-2 shadow-sm">
+        <div className="grid grid-cols-[2.75rem_1fr_2.75rem] items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setJanelaInicio((prev) => subDays(prev, 7))}
+            disabled={!podeVoltar}
+            aria-label="Ver período anterior"
+            title="Período anterior"
+            className="flex aspect-square items-center justify-center rounded-xl border border-slate-300 bg-white text-lg font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            <span aria-hidden="true">←</span>
+          </button>
+
+          <div className="flex min-w-0 flex-col items-center gap-1">
+            <span className="text-center text-xs font-semibold text-slate-700 sm:text-sm">
+              {format(janelaInicio, "dd/MM")} - {format(fimDaJanela, "dd/MM")}
+            </span>
+            <button
+              type="button"
+              onClick={() => setJanelaInicio(startOfToday())}
+              className="rounded-lg bg-slate-950 px-3 py-1 text-xs font-semibold text-white shadow-sm transition hover:bg-slate-800"
+            >
+              Hoje
+            </button>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setJanelaInicio((prev) => addDays(prev, 7))}
+            aria-label="Ver próximo período"
+            title="Próximo período"
+            className="flex aspect-square items-center justify-center rounded-xl border border-slate-300 bg-white text-lg font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-100"
+          >
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
 
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-7 gap-1 sm:gap-2">
