@@ -2,6 +2,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Icone from "@/app/componentes/Icones";
 import { Agendamento, HorarioFuncionamento, Profissional, Servico } from "../types/agenda";
 import { calcularHorarioEncaixe, ResultadoEncaixe } from "../lib/agenda";
 
@@ -117,7 +118,7 @@ export default function ModalEncaixe({
                         className="rounded-lg p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
                         aria-label="Fechar"
                     >
-                        ✕
+                        <Icone tipo="fechar" className="h-5 w-5" />
                     </button>
                 </div>
 
@@ -201,7 +202,11 @@ export default function ModalEncaixe({
                         >
                             <div className="mb-3 flex items-center gap-2">
                                 <span className="text-lg" aria-hidden="true">
-                                    {resultado.conflito ? "⚠️" : "✅"}
+                                    {resultado.conflito ? (
+                                        <Icone tipo="alerta" className="h-5 w-5" />
+                                    ) : (
+                                        <Icone tipo="check-circle" className="h-5 w-5" />
+                                    )}
                                 </span>
                                 <span
                                     className={`text-sm font-semibold ${resultado.conflito ? "text-yellow-800" : "text-green-800"

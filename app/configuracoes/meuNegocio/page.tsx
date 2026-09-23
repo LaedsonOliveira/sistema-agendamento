@@ -18,15 +18,15 @@ import AbaPersonalizacao from "./componentes/AbaPersonalizacao";
 
 // Dados mockados iniciais
 const dadosMock: DadosNegocio = {
-    nome: "teste",
-    descricao: "A melhor barbearia da região com profissionais experientes",
-    telefone: "(81) 99999-9999",
-    email: "contato@barbeariaedyni.com",
-    cnpj: "12.345.678/0001-90",
-    endereco: "Rua Exemplo, 123",
-    cidade: "Recife",
-    estado: "PE",
-    cep: "50000-000"
+    nome: "",
+    descricao: "",
+    telefone: "",
+    email: "",
+    cnpj: "",
+    endereco: "",
+    cidade: "",
+    estado: "",
+    cep: ""
 };
 
 const servicosMock: Servico[] = [
@@ -36,8 +36,8 @@ const servicosMock: Servico[] = [
 ];
 
 const barbeirosMock: Barbeiro[] = [
-    { id: "1", nome: "João Silva", telefone: "(81) 98888-8888", email: "joao@barbearia.com", foto: null, ativo: true },
-    { id: "2", nome: "Pedro Santos", telefone: "(81) 97777-7777", email: "pedro@barbearia.com", foto: null, ativo: true },
+    { id: "1", nome: "João Silva", telefone: "(81) 98888-8888", email: "funcionario1@exemplo.com", foto: null, ativo: true },
+    { id: "2", nome: "Pedro Santos", telefone: "(81) 97777-7777", email: "funcionario2@exemplo.com", foto: null, ativo: true },
 ];
 
 const horariosMock: HorarioDia[] = [
@@ -51,15 +51,15 @@ const horariosMock: HorarioDia[] = [
 ];
 
 const personalizacaoMock: Personalizacao = {
-    nomeNegocio: "teste",
+    nomeNegocio: "",
     corPrimaria: "#1a1a2e",
     corSecundaria: "#e94560",
     logo: null,
     banner: null,
-    mensagemBoasVindas: "Bem-vindo à Barbearia! Agende seu horário e saia renovado.",
-    instagram: "@barbearateste",
-    facebook: "/barbearateste",
-    whatsapp: "(81) 99999-9999"
+    mensagemBoasVindas: "",
+    instagram: "",
+    facebook: "",
+    whatsapp: ""
 };
 
 function MeuNegocioConteudo() {
@@ -83,7 +83,7 @@ function MeuNegocioConteudo() {
     const abas = [
         { id: "dados", label: "Dados do Negócio" },
         { id: "servicos", label: "Serviços" },
-        { id: "barbeiros", label: "Barbeiros" },
+        { id: "barbeiros", label: "Funcionários" },
         { id: "horarios", label: "Horários" },
         { id: "personalizacao", label: "Personalização" },
     ];

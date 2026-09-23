@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Icone from "../componentes/Icones";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,7 +58,7 @@ export default function Sidebar() {
       >
         <div className="mb-5 flex items-center gap-3 rounded-xl bg-white px-3 py-2 shadow-sm ring-1 ring-slate-200">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-900 text-sm font-semibold text-white">
-            ✂
+            <Icone tipo="tesoura" className="h-5 w-5" />
           </div>
           <div>
             <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Sistema</p>
@@ -72,8 +73,8 @@ export default function Sidebar() {
               href={href}
               onClick={() => setIsOpen(false)}
               className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${active
-                  ? "bg-slate-900 text-white shadow-sm"
-                  : "text-slate-700 hover:bg-slate-200 hover:text-slate-950"
+                ? "bg-slate-900 text-white shadow-sm"
+                : "text-slate-700 hover:bg-slate-200 hover:text-slate-950"
                 }`}
             >
               <span className={active ? "text-white" : "text-slate-500"}>{icon}</span>
@@ -84,8 +85,8 @@ export default function Sidebar() {
           <button
             onClick={() => setConfiguracoesAberto(!configuracoesAberto)}
             className={`flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 ${configuracoesAberto
-                ? "bg-slate-200 text-slate-950"
-                : "text-slate-700 hover:bg-slate-200 hover:text-slate-950"
+              ? "bg-slate-200 text-slate-950"
+              : "text-slate-700 hover:bg-slate-200 hover:text-slate-950"
               }`}
           >
             <span className="flex items-center gap-3">
@@ -106,8 +107,8 @@ export default function Sidebar() {
               <Link
                 href="/configuracoes/perfil"
                 className={`block rounded-lg px-3 py-2 text-sm transition-colors ${pathname === "/configuracoes/perfil"
-                    ? "bg-slate-900 font-medium text-white"
-                    : "text-slate-600 hover:bg-slate-200 hover:text-slate-950"
+                  ? "bg-slate-900 font-medium text-white"
+                  : "text-slate-600 hover:bg-slate-200 hover:text-slate-950"
                   }`}
               >
                 Perfil
@@ -116,8 +117,8 @@ export default function Sidebar() {
               <Link
                 href="/configuracoes/meuNegocio"
                 className={`block rounded-lg px-3 py-2 text-sm transition-colors ${pathname === "/configuracoes/meuNegocio"
-                    ? "bg-slate-900 font-medium text-white"
-                    : "text-slate-600 hover:bg-slate-200 hover:text-slate-950"
+                  ? "bg-slate-900 font-medium text-white"
+                  : "text-slate-600 hover:bg-slate-200 hover:text-slate-950"
                   }`}
               >
                 Meu Negócio

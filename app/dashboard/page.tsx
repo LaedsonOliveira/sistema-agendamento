@@ -3,6 +3,7 @@
 
 import { useMemo } from "react";
 import { format } from "date-fns";
+import Icone from "../componentes/Icones";
 import CardResumo from "./componentes/CardResumo";
 import AgendaDoDia from "./componentes/AgendaDoDia";
 import GraficoAgendamentos from "./componentes/GraficoAgendamento";
@@ -156,26 +157,26 @@ export default function Dashboard() {
                     titulo="Agendamentos Hoje"
                     valor={resumo.agendamentosHoje}
                     tipo="numero"
-                    icone="📅"
+                    icone={<Icone tipo="calendario" className="h-5 w-5" />}
                 />
                 <CardResumo
                     titulo="Faturamento Hoje"
                     valor={resumo.faturamentoHoje}
                     tipo="moeda"
                     destaque="positivo"
-                    icone="💰"
+                    icone={<Icone tipo="cifrao" className="h-5 w-5" />}
                 />
                 <CardResumo
                     titulo="Clientes Atendidos"
                     valor={resumo.clientesAtendidos}
                     tipo="numero"
-                    icone="👥"
+                    icone={<Icone tipo="usuarios" className="h-5 w-5" />}
                 />
                 <CardResumo
                     titulo="Próximo Agendamento"
                     valor={resumo.proximoAgendamento}
                     tipo="texto"
-                    icone="⏰"
+                    icone={<Icone tipo="relogio" className="h-5 w-5" />}
                 />
             </div>
 

@@ -30,6 +30,7 @@ export default function AbaDados({ dados, setDados }: Props) {
               name="nome"
               value={dados.nome}
               onChange={handleChange}
+              placeholder="Ex: Meu Negócio"
               required
               className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
             />
@@ -43,6 +44,7 @@ export default function AbaDados({ dados, setDados }: Props) {
               name="telefone"
               value={dados.telefone}
               onChange={handleChange}
+              placeholder="(81) 99999-9999"
               required
               className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
             />
@@ -56,6 +58,7 @@ export default function AbaDados({ dados, setDados }: Props) {
               name="email"
               value={dados.email}
               onChange={handleChange}
+              placeholder="contato@meunegocio.com"
               required
               className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
             />
@@ -69,6 +72,7 @@ export default function AbaDados({ dados, setDados }: Props) {
               name="cnpj"
               value={dados.cnpj}
               onChange={handleChange}
+              placeholder="12.345.678/0001-90"
               className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
             />
           </label>
@@ -81,6 +85,7 @@ export default function AbaDados({ dados, setDados }: Props) {
               name="endereco"
               value={dados.endereco}
               onChange={handleChange}
+              placeholder="Rua Exemplo, 123"
               className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
             />
           </label>
@@ -93,6 +98,7 @@ export default function AbaDados({ dados, setDados }: Props) {
               name="cidade"
               value={dados.cidade}
               onChange={handleChange}
+              placeholder="Recife"
               className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
             />
           </label>
@@ -105,6 +111,7 @@ export default function AbaDados({ dados, setDados }: Props) {
               name="estado"
               value={dados.estado}
               onChange={handleChange}
+              placeholder="PE"
               className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm uppercase text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
             />
           </label>
@@ -117,6 +124,7 @@ export default function AbaDados({ dados, setDados }: Props) {
               name="cep"
               value={dados.cep}
               onChange={handleChange}
+              placeholder="50000-000"
               className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
             />
           </label>
@@ -129,6 +137,7 @@ export default function AbaDados({ dados, setDados }: Props) {
               value={dados.descricao}
               onChange={handleChange}
               rows={3}
+              placeholder="O melhor negócio da região com profissionais experientes"
               className="mt-2 w-full resize-y rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm leading-6 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
             />
           </label>

@@ -13,7 +13,7 @@ interface FormData {
 const Perfil: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     nome: 'teste',
-    email: 'edyni@email.com',
+    email: 'contato@meunegocio.com',
     telefone: '(81) 99999-9999',
     senha: '***********'
   });

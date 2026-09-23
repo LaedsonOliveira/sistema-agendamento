@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Icone from "@/app/componentes/Icones";
 import { Transacao, StatusTransacao } from "../types/Financeiro";
 
 interface Props {
@@ -52,7 +53,7 @@ export default function ModalEditarTransacao({
             onClick={onFechar}
             className="text-slate-400 transition hover:text-slate-700"
           >
-            ✕
+            <Icone tipo="fechar" className="h-5 w-5" />
           </button>
         </div>
 

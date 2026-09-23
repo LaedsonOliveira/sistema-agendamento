@@ -5,13 +5,13 @@ export default function Home() {
     <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-12">
       <section className="w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm sm:p-12">
         <p className="text-sm font-semibold uppercase tracking-wider text-slate-500">
-          Gestão para barbearias
+          Gestão para negócios
         </p>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
           Sistema de Agendamento
         </h1>
         <p className="mt-4 text-base text-slate-600">
-          Gerencie sua barbearia de forma simples
+          Gerencie seu negócio de forma simples
         </p>
 
         <div className="mt-8 flex flex-col gap-3">

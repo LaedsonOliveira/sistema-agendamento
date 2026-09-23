@@ -2,6 +2,7 @@
 
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import Icone from "@/app/componentes/Icones";
 
 interface Props {
     estabelecimento: {
@@ -36,7 +37,7 @@ export default function ConfirmacaoAgendamento({
                     className="flex h-20 w-20 items-center justify-center rounded-full text-3xl shadow-sm"
                     style={{ backgroundColor: `${cores.secondary}18`, color: cores.secondary }}
                 >
-                    ✓
+                    <Icone tipo="check" className="h-9 w-9" />
                 </div>
             </div>
 

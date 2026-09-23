@@ -1,11 +1,13 @@
 // components/dashboard/CardResumo.tsx
 "use client";
 
+import type { ReactNode } from "react";
+
 interface Props {
   titulo: string;
   valor: number | string;
   tipo?: "moeda" | "numero" | "texto";
-  icone?: string;
+  icone?: ReactNode;
   destaque?: "positivo" | "negativo" | "neutro";
 }
 

@@ -61,7 +61,7 @@ export default function AbaBarbeiros({ barbeiros, setBarbeiros }: Props) {
   };
 
   const handleDelete = (id: string) => {
-    if (confirm("Tem certeza que deseja excluir este barbeiro?")) {
+    if (confirm("Tem certeza que deseja excluir este funcionário?")) {
       setBarbeiros(barbeiros.filter(b => b.id !== id));
     }
   };
@@ -70,17 +70,17 @@ export default function AbaBarbeiros({ barbeiros, setBarbeiros }: Props) {
     <div className="space-y-6">
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
         <div>
-          <h2 className="text-xl font-semibold text-slate-950">Barbeiros</h2>
-          <p className="mt-1 text-sm text-slate-500">Gerencie os profissionais da barbearia</p>
+          <h2 className="text-xl font-semibold text-slate-950">Funcionários</h2>
+          <p className="mt-1 text-sm text-slate-500">Gerencie os profissionais do seu negócio</p>
         </div>
         <button onClick={() => handleOpenModal()} className="rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2">
-          + Novo Barbeiro
+          + Novo Funcionário
         </button>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         {barbeiros.length === 0 ? (
-          <p className="rounded-xl border border-dashed border-slate-300 p-8 text-center text-sm text-slate-500 md:col-span-2">Nenhum barbeiro cadastrado.</p>
+          <p className="rounded-xl border border-dashed border-slate-300 p-8 text-center text-sm text-slate-500 md:col-span-2">Nenhum funcionário cadastrado.</p>
         ) : (
           barbeiros.map((barbeiro) => (
             <div key={barbeiro.id} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
@@ -133,7 +133,7 @@ export default function AbaBarbeiros({ barbeiros, setBarbeiros }: Props) {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/40 p-4 backdrop-blur-sm">
           <div className="w-full max-w-md rounded-xl bg-white shadow-xl">
             <div className="p-6">
-              <h2 className="text-xl font-semibold text-slate-950">{editando ? "Editar Barbeiro" : "Novo Barbeiro"}</h2>
+              <h2 className="text-xl font-semibold text-slate-950">{editando ? "Editar Funcionário" : "Novo Funcionário"}</h2>
 
               <form onSubmit={handleSubmit} className="mt-6 space-y-5">
                 <div>
@@ -185,7 +185,7 @@ export default function AbaBarbeiros({ barbeiros, setBarbeiros }: Props) {
                       checked={form.ativo !== false}
                       onChange={handleChange}
                     />
-                    Barbeiro ativo
+                    Funcionário ativo
                   </label>
                 </div>
 

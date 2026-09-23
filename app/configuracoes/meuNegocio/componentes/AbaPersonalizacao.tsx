@@ -110,7 +110,7 @@ export default function AbaPersonalizacao({ personalizacao, setPersonalizacao }:
                 <div className="absolute left-1/2 top-0 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white bg-slate-100 text-xs text-slate-400 shadow-md">Sem logo</div>
               )}
 
-              <h3 className="font-semibold text-slate-950">{personalizacao.nomeNegocio || "Sua Barbearia"}</h3>
+              <h3 className="font-semibold text-slate-950">{personalizacao.nomeNegocio || "Meu Negócio"}</h3>
 
               <p className="mx-auto max-w-md text-sm leading-6 text-slate-500">{personalizacao.mensagemBoasVindas || "Bem-vindo! Agende seu horário."}</p>
 
@@ -222,7 +222,7 @@ export default function AbaPersonalizacao({ personalizacao, setPersonalizacao }:
             value={personalizacao.mensagemBoasVindas || ""}
             onChange={handleChange}
             rows={3}
-            placeholder="Escreva uma mensagem de boas-vindas para seus clientes..."
+            placeholder="Ex: Bem-vindo ao Meu Negócio! Agende seu horário e aproveite."
             className="mt-2 w-full resize-y rounded-lg border border-slate-300 px-3 py-2.5 text-sm leading-6 outline-none focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
           />
         </div>
@@ -236,7 +236,7 @@ export default function AbaPersonalizacao({ personalizacao, setPersonalizacao }:
               name="nomeNegocio"
               value={personalizacao.nomeNegocio || ""}
               onChange={handleChange}
-              placeholder="Ex: teste"
+              placeholder="Ex: Meu Negócio"
               className="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
             />
           </div>
@@ -248,7 +248,7 @@ export default function AbaPersonalizacao({ personalizacao, setPersonalizacao }:
               name="instagram"
               value={personalizacao.instagram || ""}
               onChange={handleChange}
-              placeholder="@barbeariaedyni"
+              placeholder="@meunegocio"
               className="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-slate-950 focus:ring-2 focus:ring-slate-200"
             />
           </div>

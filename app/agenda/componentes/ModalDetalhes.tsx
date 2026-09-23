@@ -3,6 +3,7 @@
 
 import { format, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import Icone from "@/app/componentes/Icones";
 import { Agendamento, StatusAgendamento } from "../types/agenda";
 
 interface Props {
@@ -37,7 +38,7 @@ export default function ModalDetalhes({
                         onClick={onFechar}
                         className="text-slate-400 transition hover:text-slate-700"
                     >
-                        ✕
+                        <Icone tipo="fechar" className="h-5 w-5" />
                     </button>
                 </div>
 

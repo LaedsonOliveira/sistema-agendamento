@@ -1,5 +1,7 @@
 "use client";
 
+import Icone from "@/app/componentes/Icones";
+
 interface Servico {
   id: string;
   nome: string;
@@ -37,7 +39,7 @@ export default function EtapaServico({
           className="flex h-10 w-10 items-center justify-center rounded-xl text-lg shadow-sm"
           style={{ backgroundColor: `${cores.secondary}1A`, color: cores.secondary }}
         >
-          🧴
+          <Icone tipo="ferramentas" className="h-5 w-5" />
         </div>
         <div>
           <h2 className="text-xl font-bold text-slate-900">
@@ -56,8 +58,8 @@ export default function EtapaServico({
             type="button"
             onClick={() => onSelect(servico)}
             className={`flex w-full items-start justify-between gap-3 rounded-2xl border p-4 text-left transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${selecionado?.id === servico.id
-                ? "bg-slate-900 text-white"
-                : "border-slate-200 bg-slate-50 text-slate-900 hover:border-slate-300"
+              ? "bg-slate-900 text-white"
+              : "border-slate-200 bg-slate-50 text-slate-900 hover:border-slate-300"
               }`}
             style={
               selecionado?.id === servico.id

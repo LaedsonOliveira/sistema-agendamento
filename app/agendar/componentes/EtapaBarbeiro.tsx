@@ -1,5 +1,7 @@
 "use client";
 
+import Icone from "@/app/componentes/Icones";
+
 interface Profissional {
     id: string;
     nome: string;
@@ -32,7 +34,7 @@ export default function EtapaBarbeiro({
                     className="flex h-10 w-10 items-center justify-center rounded-xl text-lg shadow-sm"
                     style={{ backgroundColor: `${cores.secondary}1A`, color: cores.secondary }}
                 >
-                    ✂️
+                    <Icone tipo="tesoura" className="h-5 w-5" />
                 </div>
                 <div>
                     <h2 className="text-xl font-bold text-slate-900">
@@ -52,8 +54,8 @@ export default function EtapaBarbeiro({
                             type="button"
                             onClick={() => onSelect(profissional)}
                             className={`rounded-2xl border p-4 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${selecionado?.id === profissional.id
-                                    ? "bg-slate-900 text-white shadow-sm"
-                                    : "border-slate-200 bg-slate-50 text-slate-900 hover:border-slate-300"
+                                ? "bg-slate-900 text-white shadow-sm"
+                                : "border-slate-200 bg-slate-50 text-slate-900 hover:border-slate-300"
                                 }`}
                             style={
                                 selecionado?.id === profissional.id

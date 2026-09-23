@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
+import Icone from "@/app/componentes/Icones";
 import { Despesa, CategoriaDespesa, CATEGORIAS_DESPESA } from "../types/Financeiro";
 
 interface Props {
@@ -51,7 +52,7 @@ export default function ModalNovaDespesa({ onSalvar, onFechar }: Props) {
                         onClick={onFechar}
                         className="text-slate-400 transition hover:text-slate-700"
                     >
-                        ✕
+                        <Icone tipo="fechar" className="h-5 w-5" />
                     </button>
                 </div>
 

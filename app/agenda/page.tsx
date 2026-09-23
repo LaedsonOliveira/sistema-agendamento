@@ -345,7 +345,7 @@ export default function Agenda() {
                 <div>
                     <h1 className="text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">Agenda</h1>
                     <p className="mt-1 text-sm text-slate-500">
-                        Gerencie todos os agendamentos da sua barbearia
+                        Gerencie todos os agendamentos do seu negócio
                     </p>
                 </div>
                 <div className="flex flex-col gap-2 sm:flex-row">

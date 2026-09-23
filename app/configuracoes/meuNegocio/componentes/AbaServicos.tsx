@@ -84,7 +84,7 @@ export default function AbaServicos({ servicos, setServicos, barbeiros }: Props)
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
         <div>
           <h2 className="text-xl font-semibold text-slate-950">Serviços</h2>
-          <p className="mt-1 text-sm text-slate-500">Gerencie os serviços oferecidos pela barbearia</p>
+          <p className="mt-1 text-sm text-slate-500">Gerencie os serviços oferecidos pelo seu negócio</p>
         </div>
         <button onClick={() => handleOpenModal()} className="rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2">
           + Novo Serviço
@@ -204,10 +204,10 @@ export default function AbaServicos({ servicos, setServicos, barbeiros }: Props)
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700">Barbeiros que fazem este serviço</label>
+                  <label className="block text-sm font-medium text-slate-700">Funcionários que fazem este serviço</label>
                   <div className="mt-2 space-y-2">
                     {barbeirosAtivos.length === 0 ? (
-                      <p>Nenhum barbeiro ativo. Cadastre barbeiros primeiro.</p>
+                      <p>Nenhum funcionário ativo. Cadastre funcionários primeiro.</p>
                     ) : (
                       barbeirosAtivos.map((barbeiro) => (
                         <label key={barbeiro.id} className="flex items-center gap-2 text-sm text-slate-600">

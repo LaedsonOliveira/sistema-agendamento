@@ -49,7 +49,7 @@ export function calcularHorarioEncaixe(
       horarioInicio: "",
       horarioFim: "",
       conflito: false,
-      mensagem: "A barbearia não funciona hoje.",
+      mensagem: "O meu negócio não funciona hoje.",
     };
   }
 

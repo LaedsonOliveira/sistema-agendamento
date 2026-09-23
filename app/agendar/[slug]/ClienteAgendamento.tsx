@@ -4,6 +4,7 @@
 import { useState, useMemo } from "react";
 import { format, isSameDay, parseISO } from "date-fns";
 import Image from "next/image";
+import Icone from "@/app/componentes/Icones";
 import EtapaBarbeiro from "../componentes/EtapaBarbeiro";
 import EtapaServico from "../componentes/EtapaServico";
 import EtapaData from "../componentes/EtapaData";
@@ -292,12 +293,12 @@ export default function ClienteAgendamento({ estabelecimento }: Props) {
               />
             ) : (
               <div className="flex h-24 w-24 items-center justify-center rounded-full border-4 border-white bg-white/10 text-4xl shadow-lg text-white">
-                ✂
+                <Icone tipo="tesoura" className="h-10 w-10" />
               </div>
             )}
           </div>
 
-          {/* Nome da barbearia - centralizado */}
+          {/* Nome do negócio - centralizado */}
           <h1
             className="mt-3 text-2xl font-bold"
             style={{ color: cores.secondary }}
@@ -335,7 +336,7 @@ export default function ClienteAgendamento({ estabelecimento }: Props) {
                       }`}
                     style={isAtiva ? { backgroundColor: cores.secondary } : {}}
                   >
-                    {isConcluida ? "✓" : index + 1}
+                    {isConcluida ? <Icone tipo="check" className="h-4 w-4" /> : index + 1}
                   </div>
                   {index < etapasLista.length - 1 && (
                     <div

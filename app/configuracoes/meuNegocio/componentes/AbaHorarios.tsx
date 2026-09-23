@@ -37,7 +37,7 @@ export default function AbaHorarios({ horarios, setHorarios }: Props) {
     <div className="space-y-6">
       <div>
         <h2 className="text-xl font-semibold text-slate-950">Horários de Funcionamento</h2>
-        <p className="mt-1 text-sm text-slate-500">Defina os dias e horários que a barbearia funciona</p>
+        <p className="mt-1 text-sm text-slate-500">Defina os dias e horários que o seu negócio funciona</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-3">

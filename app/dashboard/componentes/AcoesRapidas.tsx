@@ -2,32 +2,40 @@
 "use client";
 
 import Link from "next/link";
+import Icone, { type TipoIcone } from "@/app/componentes/Icones";
+
+interface Acao {
+  href: string;
+  label: string;
+  descricao: string;
+  icone: TipoIcone;
+}
 
 export default function AcoesRapidas() {
-  const acoes = [
+  const acoes: Acao[] = [
     {
       href: "/agendar/teste",
       label: "Novo Agendamento",
       descricao: "Criar um novo agendamento",
-      icone: "＋",
+      icone: "mais",
     },
     {
       href: "/agenda",
       label: "Ver Agenda",
       descricao: "Ver todos os agendamentos",
-      icone: "📅",
+      icone: "calendario",
     },
     {
       href: "/financeiro",
       label: "Ver Financeiro",
       descricao: "Ver relatório financeiro",
-      icone: "💰",
+      icone: "cifrao",
     },
     {
       href: "/configuracoes/meuNegocio",
       label: "Configurações",
       descricao: "Configurar o negócio",
-      icone: "⚙️",
+      icone: "ferramentas",
     },
   ];
 
@@ -45,7 +53,7 @@ export default function AcoesRapidas() {
             className="flex min-h-[104px] flex-col items-center justify-center rounded-xl border border-slate-200 bg-slate-50 p-3 text-center transition hover:border-slate-950 hover:bg-white hover:shadow-md"
           >
             <span className="mb-2 flex h-9 w-9 items-center justify-center rounded-full bg-white text-lg shadow-sm">
-              {acao.icone}
+              <Icone tipo={acao.icone} className="h-5 w-5" />
             </span>
             <span className="text-sm font-medium text-slate-900">
               {acao.label}
