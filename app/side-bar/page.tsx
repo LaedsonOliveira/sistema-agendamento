@@ -37,7 +37,7 @@ export default function Sidebar() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
-        className="fixed left-4 top-4 z-50 rounded-xl bg-slate-900 p-2.5 text-white shadow-lg transition hover:bg-slate-800 lg:hidden"
+        className="fixed left-4 top-4 z-[60] rounded-xl bg-slate-900 p-2.5 text-white shadow-lg transition hover:bg-slate-800 lg:hidden"
       >
         <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           {isOpen ? (
@@ -106,6 +106,7 @@ export default function Sidebar() {
             <div className="ml-3 mt-1 space-y-1 border-l border-slate-300 pl-2">
               <Link
                 href="/configuracoes/perfil"
+                onClick={() => setIsOpen(false)}
                 className={`block rounded-lg px-3 py-2 text-sm transition-colors ${pathname === "/configuracoes/perfil"
                   ? "bg-slate-900 font-medium text-white"
                   : "text-slate-600 hover:bg-slate-200 hover:text-slate-950"
@@ -116,6 +117,7 @@ export default function Sidebar() {
 
               <Link
                 href="/configuracoes/meuNegocio"
+                onClick={() => setIsOpen(false)}
                 className={`block rounded-lg px-3 py-2 text-sm transition-colors ${pathname === "/configuracoes/meuNegocio"
                   ? "bg-slate-900 font-medium text-white"
                   : "text-slate-600 hover:bg-slate-200 hover:text-slate-950"

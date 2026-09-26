@@ -251,98 +251,101 @@ export default function ClienteAgendamento({ estabelecimento }: Props) {
   // ========================================
   // RENDER
   // ========================================
-  return (
-    <div className="min-h-screen bg-slate-50">
-      {/* ===== HEADER COM BANNER E LOGO CENTRALIZADOS ===== */}
-      <div
-        className="relative bg-cover bg-center pt-8"
-        style={{
-          backgroundColor: cores.primary,
-          backgroundImage: estabelecimento.banner
-            ? `url(${estabelecimento.banner})`
-            : "none",
-        }}
-      >
-        {/* Overlay escuro sobre o banner */}
-        {estabelecimento.banner && (
-          <div className="absolute inset-0 bg-black/40" />
-        )}
+ return (
+  <div className="min-h-screen bg-slate-50">
+    {/* ===== HEADER COM BANNER E LOGO ===== */}
+    <div
+      className="relative bg-cover bg-center"
+      style={{
+        backgroundColor: cores.primary,
+        backgroundImage: estabelecimento.banner
+          ? `url(${estabelecimento.banner})`
+          : "none",
+      }}
+    >
+      {/* Overlay escuro sobre o banner */}
+      {estabelecimento.banner && (
+        <div className="absolute inset-0 bg-black/40" />
+      )}
 
-        {/* Conteúdo centralizado */}
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          {/* Logo - centralizada */}
-          <div className="flex justify-center">
-            {estabelecimento.logoUrl ? (
-              <Image
-                src={estabelecimento.logoUrl}
-                alt={estabelecimento.name}
-                width={96}
-                height={96}
-                unoptimized
-                className="h-24 w-24 rounded-full border-4 border-white object-cover shadow-lg"
-              />
-            ) : (
-              <div className="flex h-24 w-24 items-center justify-center rounded-full border-4 border-white bg-white/10 text-4xl shadow-lg text-white">
-                <Icone tipo="tesoura" className="h-10 w-10" />
-              </div>
-            )}
-          </div>
-
-          {/* Nome do negócio - centralizado */}
-          <h1
-            className="mt-3 text-2xl font-bold"
-            style={{ color: cores.secondary }}
-          >
-            {estabelecimento.name}
-          </h1>
-
-          {/* Subtítulo - centralizado */}
-          <p className="mt-1 text-sm text-white/80">
-            Agende seu horário de forma rápida e fácil
-          </p>
-
-          {/* Espaço extra no final */}
-          <div className="pb-6"></div>
+      {/* Conteúdo centralizado */}
+      <div className="relative z-10 container mx-auto px-4 py-6 text-center sm:py-8">
+        {/* Logo - centralizada */}
+        <div className="flex justify-center">
+          {estabelecimento.logoUrl ? (
+            <Image
+              src={estabelecimento.logoUrl}
+              alt={estabelecimento.name}
+              width={80}
+              height={80}
+              unoptimized
+              className="h-20 w-20 rounded-full border-4 border-white object-cover shadow-lg sm:h-24 sm:w-24"
+            />
+          ) : (
+            <div className="flex h-20 w-20 items-center justify-center rounded-full border-4 border-white bg-white/10 text-white shadow-lg sm:h-24 sm:w-24">
+              <Icone tipo="tesoura" className="h-8 w-8 sm:h-10 sm:w-10" />
+            </div>
+          )}
         </div>
+
+        {/* Nome do negócio */}
+        <h1
+          className="mt-3 text-xl font-bold sm:text-2xl"
+          style={{ color: cores.secondary }}
+        >
+          {estabelecimento.name}
+        </h1>
+
+        {/* Subtítulo */}
+        <p className="mt-1 text-xs text-white/80 sm:text-sm">
+          Agende seu horário de forma rápida e fácil
+        </p>
       </div>
+    </div>
 
-      {/* ===== CONTEÚDO ===== */}
-      <div className="container mx-auto max-w-2xl px-3 py-5 sm:px-4 sm:py-8">
-        <div className="rounded-2xl bg-white p-4 shadow-lg sm:p-6">
-          {/* PROGRESSO */}
-          <div className="mb-6 flex items-center justify-between gap-1 sm:gap-2">
-            {etapasLista.map((key, index) => {
-              const isConcluida = index < etapaAtual;
-              const isAtiva = index === etapaAtual;
+    {/* ===== CONTEÚDO ===== */}
+    <div className="mx-auto w-full max-w-2xl px-3 py-4 sm:px-4 sm:py-8">
+      <div className="rounded-2xl bg-white p-4 shadow-lg sm:p-6">
+        {/* PROGRESSO */}
+        <div className="mb-5 flex items-center justify-between gap-1 sm:mb-6 sm:gap-2">
+          {etapasLista.map((key, index) => {
+            const isConcluida = index < etapaAtual;
+            const isAtiva = index === etapaAtual;
 
-              return (
-                <div key={key} className="flex items-center">
-                  <div
-                    className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium transition ${isConcluida
+            return (
+              <div key={key} className="flex items-center">
+                <div
+                  className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-medium transition sm:h-8 sm:w-8 sm:text-sm ${
+                    isConcluida
                       ? "bg-green-500 text-white"
                       : isAtiva
                         ? "text-white"
                         : "bg-slate-200 text-slate-500"
-                      }`}
-                    style={isAtiva ? { backgroundColor: cores.secondary } : {}}
-                  >
-                    {isConcluida ? <Icone tipo="check" className="h-4 w-4" /> : index + 1}
-                  </div>
-                  {index < etapasLista.length - 1 && (
-                    <div
-                      className={`h-0.5 min-w-2 flex-1 transition sm:max-w-8 ${isConcluida ? "bg-green-500" : "bg-slate-200"
-                        }`}
-                    />
+                  }`}
+                  style={isAtiva ? { backgroundColor: cores.secondary } : {}}
+                >
+                  {isConcluida ? (
+                    <Icone tipo="check" className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                  ) : (
+                    index + 1
                   )}
                 </div>
-              );
-            })}
-          </div>
-
-          {/* ETAPA ATUAL */}
-          {renderEtapa()}
+                {index < etapasLista.length - 1 && (
+                  <div
+                    className={`h-0.5 min-w-2 flex-1 transition sm:max-w-8 ${
+                      isConcluida ? "bg-green-500" : "bg-slate-200"
+                    }`}
+                  />
+                )}
+              </div>
+            );
+          })}
         </div>
+
+        {/* ETAPA ATUAL */}
+        {renderEtapa()}
       </div>
     </div>
-  );
+  </div>
+);
 }
