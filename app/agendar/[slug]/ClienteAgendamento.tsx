@@ -7,8 +7,7 @@ import Image from "next/image";
 import Icone from "@/app/componentes/Icones";
 import EtapaBarbeiro from "../componentes/EtapaBarbeiro";
 import EtapaServico from "../componentes/EtapaServico";
-import EtapaData from "../componentes/EtapaData";
-import EtapaHorario from "../componentes/EtapaHorario";
+import EtapaDataHorario from "../componentes/EtapaDataHorario";
 import EtapaDadosCliente from "../componentes/EtapaDadosCliente";
 import ConfirmacaoAgendamento from "../componentes/ConfirmacaoAgendamento";
 
@@ -56,10 +55,9 @@ interface Props {
 const ETAPAS = {
   BARBEIRO: 0,
   SERVICO: 1,
-  DATA: 2,
-  HORARIO: 3,
-  DADOS: 4,
-  CONFIRMACAO: 5,
+  DATA_HORARIO: 2,
+  DADOS: 3,
+  CONFIRMACAO: 4,
 } as const;
 
 type Etapa = (typeof ETAPAS)[keyof typeof ETAPAS];
@@ -177,79 +175,71 @@ export default function ClienteAgendamento({ estabelecimento }: Props) {
   // RENDERIZAR ETAPA
   // ========================================
   const renderEtapa = () => {
-    switch (etapaAtual) {
-      case ETAPAS.BARBEIRO:
-        return (
-          <EtapaBarbeiro
-            profissionais={estabelecimento.profissionais}
-            selecionado={profissionalSelecionado}
-            onSelect={setProfissionalSelecionado}
-            onNext={avancarEtapa}
-            cores={cores}
-          />
-        );
-      case ETAPAS.SERVICO:
-        return (
-          <EtapaServico
-            servicos={estabelecimento.servicos}
-            selecionado={servicoSelecionado}
-            onSelect={setServicoSelecionado}
-            onNext={avancarEtapa}
-            onBack={voltarEtapa}
-            cores={cores}
-          />
-        );
-      case ETAPAS.DATA:
-        return (
-          <EtapaData
-            dataSelecionada={dataSelecionada}
-            onSelect={setDataSelecionada}
-            onNext={avancarEtapa}
-            onBack={voltarEtapa}
-            cores={cores}
-          />
-        );
-      case ETAPAS.HORARIO:
-        return (
-          <EtapaHorario
-            horarios={horariosDisponiveis}
-            selecionado={horarioSelecionado}
-            onSelect={setHorarioSelecionado}
-            onNext={avancarEtapa}
-            onBack={voltarEtapa}
-            cores={cores}
-          />
-        );
-      case ETAPAS.DADOS:
-        return (
-          <EtapaDadosCliente
-            nome={nomeCliente}
-            setNome={setNomeCliente}
-            telefone={telefoneCliente}
-            setTelefone={setTelefoneCliente}
-            onNext={handleConfirmar}
-            onBack={voltarEtapa}
-            loading={loading}
-            cores={cores}
-          />
-        );
-      case ETAPAS.CONFIRMACAO:
-        return (
-          <ConfirmacaoAgendamento
-            estabelecimento={estabelecimento}
-            profissional={profissionalSelecionado!}
-            servico={servicoSelecionado!}
-            data={dataSelecionada!}
-            horario={horarioSelecionado!}
-            clienteNome={nomeCliente}
-            cores={cores}
-            onVoltar={voltarEtapa}
-          />
-        );
-      default:
-        return null;
-    }
-  };
+  switch (etapaAtual) {
+    case ETAPAS.BARBEIRO:
+      return (
+        <EtapaBarbeiro
+          profissionais={estabelecimento.profissionais}
+          selecionado={profissionalSelecionado}
+          onSelect={setProfissionalSelecionado}
+          onNext={avancarEtapa}
+          cores={cores}
+        />
+      );
+    case ETAPAS.SERVICO:
+      return (
+        <EtapaServico
+          servicos={estabelecimento.servicos}
+          selecionado={servicoSelecionado}
+          onSelect={setServicoSelecionado}
+          onNext={avancarEtapa}
+          onBack={voltarEtapa}
+          cores={cores}
+        />
+      );
+    case ETAPAS.DATA_HORARIO:
+      return (
+        <EtapaDataHorario
+          dataSelecionada={dataSelecionada}
+          onSelectData={setDataSelecionada}
+          horarioSelecionado={horarioSelecionado}
+          onSelectHorario={setHorarioSelecionado}
+          horarios={horariosDisponiveis}
+          onNext={avancarEtapa}
+          onBack={voltarEtapa}
+          cores={cores}
+        />
+      );
+    case ETAPAS.DADOS:
+      return (
+        <EtapaDadosCliente
+          nome={nomeCliente}
+          setNome={setNomeCliente}
+          telefone={telefoneCliente}
+          setTelefone={setTelefoneCliente}
+          onNext={handleConfirmar}
+          onBack={voltarEtapa}
+          loading={loading}
+          cores={cores}
+        />
+      );
+    case ETAPAS.CONFIRMACAO:
+      return (
+        <ConfirmacaoAgendamento
+          estabelecimento={estabelecimento}
+          profissional={profissionalSelecionado!}
+          servico={servicoSelecionado!}
+          data={dataSelecionada!}
+          horario={horarioSelecionado!}
+          clienteNome={nomeCliente}
+          cores={cores}
+          onVoltar={voltarEtapa}
+        />
+      );
+    default:
+      return null;
+  }
+};
 
   // ========================================
   // PROGRESSO DAS ETAPAS

@@ -2,7 +2,7 @@
 
 import { format, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { Transacao } from "../types/Financeiro";
+import { Transacao } from "../types/financeiro";
 
 interface Props {
     transacoes: Transacao[];

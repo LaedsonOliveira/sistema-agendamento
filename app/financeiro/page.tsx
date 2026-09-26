@@ -14,13 +14,13 @@ import Filtros from "./componentes/Filtros";
 import TabelaTransacoes from "./componentes/TabelaTransacoes";
 import TabelaDespesas from "./componentes/TabelaDespesas";
 import ModalNovaDespesa from "./componentes/ModalNovaDespesa";
-import ModalEditarTransacao from "./componentes/ModalEditarTrasacao";
+import ModalEditarTransacao from "./componentes/ModalEditarTransacao";
 import {
     Transacao,
     Despesa,
     ResumoFinanceiro,
     StatusTransacao,
-} from "./types/Financeiro";
+} from "./types/financeiro";
 
 // ========================================
 // DADOS MOCKADOS (FUTURO: Prisma)

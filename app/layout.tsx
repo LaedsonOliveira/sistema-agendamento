@@ -16,9 +16,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Agendamento APP",
   description: "Agendamento de Salões, Babearias e estúdios de beleza",
-  icons: {
-    icon: "/favicon.svg",
-  },
 };
 
 export default function RootLayout({

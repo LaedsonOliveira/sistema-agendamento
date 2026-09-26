@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import Icone from "@/app/componentes/Icones";
-import { Despesa, CategoriaDespesa, CATEGORIAS_DESPESA } from "../types/Financeiro";
+import { Despesa, CategoriaDespesa, CATEGORIAS_DESPESA } from "../types/financeiro";
 
 interface Props {
     onSalvar: (despesa: Despesa) => void;

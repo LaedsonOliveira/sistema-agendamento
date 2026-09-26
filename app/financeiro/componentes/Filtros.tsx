@@ -1,6 +1,6 @@
 "use client";
 
-import { StatusTransacao } from "../types/Financeiro";
+import { StatusTransacao } from "../types/financeiro";
 
 interface Props {
     filtroPeriodo: string;
@@ -43,8 +43,8 @@ export default function Filtros({
                                 key={p.valor}
                                 onClick={() => setFiltroPeriodo(p.valor)}
                                 className={`rounded-lg px-2.5 py-1.5 text-xs font-medium transition sm:px-3 sm:text-sm ${filtroPeriodo === p.valor
-                                        ? "bg-slate-950 text-white"
-                                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                                    ? "bg-slate-950 text-white"
+                                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                                     }`}
                             >
                                 {p.label}

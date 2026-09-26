@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Icone from "@/app/componentes/Icones";
-import { Transacao, StatusTransacao } from "../types/Financeiro";
+import { Transacao, StatusTransacao } from "../types/financeiro";
 
 interface Props {
   transacao: Transacao;

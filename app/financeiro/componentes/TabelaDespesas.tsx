@@ -3,7 +3,7 @@
 
 import { format, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { Despesa } from "../types/Financeiro";
+import { Despesa } from "../types/financeiro";
 
 interface Props {
   despesas: Despesa[];
